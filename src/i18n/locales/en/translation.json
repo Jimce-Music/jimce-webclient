@@ -1,0 +1,18 @@
+{
+    "Sidebar": {
+        "Dashboard": "Dashboard",
+        "Music": "Music",
+        "Podcasts": "Podcasts",
+        "Audiobooks": "Audiobooks",
+
+        "Favorites": "Favorites",
+        "Recent": "Recent",
+        "Library": "Library"
+    },
+
+    "NotFound": {
+        "Title": "404 - Page Not Found",
+        "Message": "The page you are looking for does not exist.",
+        "GoHomeButton": "Go Home"
+    }
+}

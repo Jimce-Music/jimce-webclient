@@ -1,0 +1,18 @@
+{
+    "Sidebar": {
+        "Dashboard": "Dashboard",
+        "Music": "Musik",
+        "Podcasts": "Podcasts",
+        "Audiobooks": "Hörbücher",
+
+        "Favorites": "Favoriten",
+        "Recent": "Kürzlich",
+        "Library": "Bibliothek"
+    },
+
+    "NotFound": {
+        "Title": "404 - Seite nicht gefunden",
+        "Message": "Die von Ihnen gesuchte Seite existiert nicht.",
+        "GoHomeButton": "Zur Startseite"
+    }
+}

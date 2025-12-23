@@ -1,0 +1,200 @@
+/* =====================================================
+   GLOBAL THEME VARIABLES
+   Default Theme: Neon
+   No utility or component classes
+   ===================================================== */
+
+/* ---------- Base ---------- */
+:root {
+  --font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+
+  --transition-fast: 150ms ease;
+  --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  --scrollbar-size: 8px;
+}
+
+/* =====================================================
+   NEON THEME (DEFAULT)
+   ===================================================== */
+:root,
+[data-theme="neon"] {
+  --bg-main: #0b1120;
+  --bg-sidebar: #0f172a;
+  --bg-hover: rgba(30, 41, 59, 0.7);
+  --bg-surface: rgba(51, 65, 85, 0.8);
+
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+
+  --accent-primary: #6366f1;
+  --accent-secondary: #8b5cf6;
+  --accent-danger: #ef4444;
+
+  --border-color: rgba(255, 255, 255, 0.08);
+
+  --shadow-sm: 0 4px 8px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 12px 28px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 24px 48px rgba(0, 0, 0, 0.45);
+
+  --scrollbar-track: #0f172a;
+  --scrollbar-thumb: #334155;
+  --scrollbar-thumb-hover: #475569;
+}
+
+/* =====================================================
+   GRAY THEME
+   ===================================================== */
+[data-theme="gray"] {
+  --bg-main: #1f2933;
+  --bg-sidebar: #111827;
+  --bg-hover: #1f2937;
+  --bg-surface: #374151;
+
+  --text-primary: #e5e7eb;
+  --text-secondary: #9ca3af;
+  --text-muted: #6b7280;
+
+  --accent-primary: #9ca3af;
+  --accent-secondary: #6b7280;
+  --accent-danger: #f87171;
+
+  --border-color: #374151;
+
+  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 8px 18px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 16px 32px rgba(0, 0, 0, 0.6);
+
+  --scrollbar-track: #111827;
+  --scrollbar-thumb: #4b5563;
+  --scrollbar-thumb-hover: #6b7280;
+}
+
+/* =====================================================
+   OLED THEME
+   ===================================================== */
+[data-theme="oled"] {
+  --bg-main: #000000;
+  --bg-sidebar: #000000;
+  --bg-hover: #050505;
+  --bg-surface: #0a0a0a;
+
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;
+  --text-muted: #52525b;
+
+  --accent-primary: #22d3ee;
+  --accent-secondary: #38bdf8;
+  --accent-danger: #fb7185;
+
+  --border-color: #0f0f0f;
+
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: none;
+
+  --scrollbar-track: #000000;
+  --scrollbar-thumb: #1f2933;
+  --scrollbar-thumb-hover: #334155;
+}
+
+/* =====================================================
+   BLACK THEME
+   ===================================================== */
+[data-theme="black"] {
+  --bg-main: #0a0a0a;
+  --bg-sidebar: #050505;
+  --bg-hover: #111111;
+  --bg-surface: #1a1a1a;
+
+  --text-primary: #f5f5f5;
+  --text-secondary: #a3a3a3;
+  --text-muted: #737373;
+
+  --accent-primary: #eab308;
+  --accent-secondary: #facc15;
+  --accent-danger: #ef4444;
+
+  --border-color: #262626;
+
+  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.6);
+  --shadow-md: 0 10px 20px rgba(0, 0, 0, 0.7);
+  --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.8);
+
+  --scrollbar-track: #050505;
+  --scrollbar-thumb: #262626;
+  --scrollbar-thumb-hover: #404040;
+}
+
+/* =====================================================
+   LIGHT THEME
+   ===================================================== */
+[data-theme="light"] {
+  --bg-main: #f8fafc;
+  --bg-sidebar: #ffffff;
+  --bg-hover: #ffffff;
+  --bg-surface: #f1f5f9;
+
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+
+  --accent-primary: #2563eb;
+  --accent-secondary: #4f46e5;
+  --accent-danger: #dc2626;
+
+  --border-color: #e5e7eb;
+
+  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.15);
+
+  --scrollbar-track: #e5e7eb;
+  --scrollbar-thumb: #cbd5f5;
+  --scrollbar-thumb-hover: #94a3b8;
+}
+
+/* =====================================================
+   GLOBAL ELEMENT STYLING
+   ===================================================== */
+html,
+body {
+  padding: 0;
+  margin: 0;
+  min-height: 100%;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  font-family: var(--font-family);
+}
+
+.app-container {
+  margin-left: 250px; /* Width of the sidebar */
+  padding: 20px;
+}
+
+/* =====================================================
+   SCROLLBAR (GLOBAL)
+   ===================================================== */
+::-webkit-scrollbar {
+  width: var(--scrollbar-size);
+  height: var(--scrollbar-size);
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
