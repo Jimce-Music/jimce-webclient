@@ -2,12 +2,61 @@
   "name": "jimce",
   "private": true,
   "version": "0.0.0",
+  "author": "Jimce-Music",
+  "description": "Jimce – a modern cross-platform app for listening to music on another level.",
+  "main": "main.js",
   "type": "module",
+  "homepage": "https://https://github.com/Jimce-Music",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "electron": "electron --no-sandbox .",
+    "clean": "rimraf dist",
+    "build-app": "npm run clean && npm run build && electron-builder"
+  },
+  "build": {
+    "appId": "com.jimce-music.jimce",
+    "productName": "Jimce",
+    "files": [
+      "dist",
+      "main.js"
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "artifactName": "Jimce-${version}-windows-${arch}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Jimce"
+    },
+    "mac": {
+      "target": [
+        "dmg",
+        "pkg",
+        "zip"
+      ],
+      "category": "public.app-category.music",
+      "artifactName": "Jimce-${version}-mac-${arch}.${ext}"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb",
+        "rpm"
+      ],
+      "category": "Music",
+      "maintainer": "Jimce-Music",
+      "synopsis": "Music but different",
+      "description": "Jimce – a modern cross-platform app for listening to music on another level.",
+      "artifactName": "Jimce-${version}-linux-${arch}.${ext}"
+    }
   },
   "dependencies": {
     "i18next": "^25.7.3",
@@ -22,6 +71,8 @@
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.1",
+    "electron": "^39.2.7",
+    "electron-builder": "^26.0.12",
     "eslint": "^9.39.1",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
