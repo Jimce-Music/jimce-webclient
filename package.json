@@ -19,6 +19,7 @@
   "build": {
     "appId": "com.jimce-music.jimce",
     "productName": "Jimce",
+    "icon": "public/logo-no-bg-outline-fullsize.png",
     "files": [
       "dist",
       "main.js"

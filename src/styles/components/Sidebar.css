@@ -1,0 +1,91 @@
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: fixed;
+    width: 250px;
+    height: 100vh;
+    background-color: var(--bg-sidebar);
+    border-right: 1px solid var(--border-color);
+}
+
+a {
+    text-decoration: none;
+    color: var(--text-primary);
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.menu, .library, .settings {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px 0;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.settings {
+    border-bottom: none;
+}
+
+.menu-title, .library-title {
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.menu-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 5px 10px;
+    height: 35px;
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: var(--transition-base);
+}
+
+.menu-option:hover {
+    background-color: var(--bg-hover);
+    cursor: pointer;
+}
+
+.menu-option.active {
+    color: var(--text-primary);
+    background-color: var(--bg-surface);
+    font-weight: bold;
+}
+
+.menu-icon {
+    width: 25px;
+    height: 25px;
+}
+
+.user-icon {
+    width: 35px;
+    height: 35px;
+}
+
+.account-info_settings {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 15px 20px;
+    border-top: 1px solid var(--border-color);
+    cursor: pointer;
+}
+
+.account-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}

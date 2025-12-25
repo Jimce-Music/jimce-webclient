@@ -7,7 +7,9 @@
 
         "Favorites": "Favorites",
         "Recent": "Recent",
-        "Library": "Library"
+        "Library": "Library",
+
+        "Settings": "Settings"
     },
 
     "NotFound": {

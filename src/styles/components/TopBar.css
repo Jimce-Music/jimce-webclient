@@ -1,0 +1,52 @@
+.topbar {
+    width: calc(100vw - 250px);
+    height: 60px;
+    background-color: var(--bg-main);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    box-sizing: border-box;
+    border-left: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    position: fixed;
+    top: 0;
+    left: 250px;
+    z-index: 0;
+}
+
+.profile {
+    width: 30px;
+    height: 30px;
+}
+
+.search-bar {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 10px 10px 10px 40px; /* links Platz für das Icon */
+    border-radius: var(--radius-lg);
+    background-color: var(--bg-sidebar);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    transition: var(--transition-base);
+}
+
+.search-bar input:focus {
+    border: 1px solid var(--accent-primary);
+    outline: none;
+}
+
+.search-bar .search-icon {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+}
