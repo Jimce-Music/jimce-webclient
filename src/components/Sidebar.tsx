@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 
 import '../styles/components/Sidebar.css';
-import Logo from '../../public/logo-no-bg.svg';
+import Logo from '../assets/logo-no-bg.svg';
 import HomeIcon from '../assets/icons/home.svg';
 import MusicIcon from '../assets/icons/music.svg';
 import PodcastIcon from '../assets/icons/podcasts.svg';

@@ -173,6 +173,7 @@ body {
   background-color: var(--bg-main);
   color: var(--text-primary);
   font-family: var(--font-family);
+  user-select: none;
 }
 
 .app-container {
