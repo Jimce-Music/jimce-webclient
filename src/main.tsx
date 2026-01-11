@@ -21,6 +21,9 @@ import Library from './pages/Library';
 
 import SettingsModal from './modals/SettingsModal.tsx';
 
+//
+import './init_api'
+//
 function App() {
   const [settingsOpen, setSettingsOpen] = useState(false);
 
