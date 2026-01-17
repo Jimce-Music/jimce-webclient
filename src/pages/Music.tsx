@@ -53,8 +53,11 @@ export default function Music() {
           onChange={(e) => setUrl(e.target.value)}
           style={{ width: "400px" }}
         />
+        <p>Just Download</p>
         <input type="checkbox" checked={justDownload} onChange={(e) => setJustDownload(e.target.checked)} />
+        <p>Save While Streaming</p>
         <input type="checkbox" checked={saveWhileStreaming} onChange={(e) => setSaveWhileStreaming(e.target.checked)} />
+        <br />
         <button type="submit">Abspielen</button>
       </form>
 
