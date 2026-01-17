@@ -8,9 +8,3 @@ api.setConfig({
     //     Authorization: 'Bearer <token>'
     // }
 })
-
-// Then make a request (fictional routes used here):
-const req = await api.getApiPing()
-
-console.log(req.error)
-console.log(req.data)

@@ -7,11 +7,19 @@ export default function Music() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!url) return;
-    
-    const res = await fetch('http://localhost:4002/request-play?identifier=' + url)
 
+    console.log("Abfragen von /request-play")
+    const requestRes = await fetch(`http://192.168.188.27:4002/request-play?identifier=${url}`)
+    const requestPlayData = await requestRes.json()
+
+    console.log("Abrufen von /stream")
+    const res = await fetch (`http://192.168.188.27:4002/stream?id=${requestPlayData.uuid}`)
     const data = await res.json()
+
+    console.log(data)
     if(!data.success) return
+
+    console.log(data.downloadedCallback)
 
     setStreamUrl(data.downloadedCallback)
   };
