@@ -1,6 +1,6 @@
 .playbar {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
     position: fixed;
     width: 100%;
@@ -8,13 +8,24 @@
     background-color: var(--bg-sidebar);
     border-top: 1px solid var(--border-color);
     bottom: 0;
-    padding-left: 25px;
-    padding-right: 25px;
+    padding: 0 25px;
+    box-sizing: border-box;
 }
 
-.playbar-left .playbar-middle .playbar-right {
+.playbar-left, 
+.playbar-middle, 
+.playbar-right {
     display: flex;
     align-items: center;
+}
+
+.playbar-middle {
+    justify-self: center;
+}
+
+.playbar-right {
+    justify-content: flex-end;
+    padding-right: 25px;
 }
 
 .playbar-left-song {
