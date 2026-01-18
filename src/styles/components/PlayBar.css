@@ -19,8 +19,43 @@
     align-items: center;
 }
 
-.playbar-middle {
-    justify-self: center;
+.playbar-middle-control-area {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+}
+
+.playbar-middle-control-area-element {
+    width: 25px;
+    height: 25px;
+    padding: 5px;
+    border-radius: 50%;
+    background-color: transparent;
+}
+
+.playbar-middle-control-area-element:hover {
+    cursor: pointer;
+    background-color: var(--bg-surface);
+    scale: 1.1;
+}
+
+.playbar-middle-control-area-playbutton {
+    text-decoration: none;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--accent-primary);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+
+.playbar-middle-control-area-playbutton:hover {
+    cursor: pointer;
+    background-color: var(--accent-secondary);
+    scale: 1.1;
 }
 
 .playbar-right {

@@ -12,10 +12,25 @@ import lyrics from '../assets/icons/playbar/lyrics.svg'
 import volumeUp from '../assets/icons/playbar/volume_up.svg'
 import volumeDown from '../assets/icons/playbar/volume_down.svg'
 import volumeOff from  '../assets/icons/playbar/volume_off.svg'
+import pause from '../assets/icons/playbar/pause.svg'
 
 export default function PlayBar() {
     const [volume, setVolume] = useState(100)
     const [recentVolume, setRecentVolume] = useState(100)
+    const [play, setPlay] = useState(1)
+
+    const getPlayIcon = () => {
+        if(play === 1) return playArrow
+        return pause
+    }
+
+    function playPause() {
+        if(play === 1) {
+            setPlay(Number(0))
+        } else {
+            setPlay(Number(1))
+        }
+    }
 
     const getVolumeIcon = () => {
         if(volume === 0) return volumeOff
@@ -46,13 +61,16 @@ export default function PlayBar() {
             </div>
             <div className="playbar-middle">
                 <div className="playbar-middle-control-area">
-                    <img src={shuffle} alt="" />
-                    <img src={skipPrevious} alt="" />
-                    <button>
-                        <img src={playArrow} alt="" />
+                    <img className='playbar-middle-control-area-element' src={shuffle} alt="" />
+                    <img className='playbar-middle-control-area-element' src={skipPrevious} alt="" />
+                    <button 
+                        className='playbar-middle-control-area-playbutton'
+                        onClick={playPause}
+                    >
+                        <img src={getPlayIcon()} alt="" />
                     </button>
-                    <img src={skipNext} alt="" />
-                    <img src={repeat} alt="" />
+                    <img className='playbar-middle-control-area-element' src={skipNext} alt="" />
+                    <img className='playbar-middle-control-area-element' src={repeat} alt="" />
                 </div>
                 <div className="playbar-middle-skipbar">
 
