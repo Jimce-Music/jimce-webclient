@@ -30,7 +30,7 @@
     width: 25px;
     height: 25px;
     padding: 5px;
-    border-radius: 50%;
+    border-radius: 25%;
     background-color: transparent;
     transition: var(--transition-fast);
 }
@@ -50,7 +50,7 @@
     background-color: var(--accent-primary);
     width: 45px;
     height: 45px;
-    border-radius: 50%;
+    border-radius: 25%;
     transition: var(--transition-base);
 }
 
@@ -61,8 +61,30 @@
 }
 
 .playbar-right {
+    display: flex;
+    flex-direction: row;
     justify-content: flex-end;
+    align-items: center;
+    gap: 2px;
     padding-right: 25px;
+}
+
+.playbar-right-volume {
+    margin-left: 12px;
+}
+
+.playbar-right-element {
+    width: 25px;
+    height: 25px;
+    padding: 5px;
+    border-radius: 25%;
+    background-color: transparent;
+    transition: var(--transition-fast);
+}
+
+.playbar-right-element:hover {
+    cursor: pointer;
+    background-color: var(--bg-surface);
 }
 
 .playbar-left-song {
