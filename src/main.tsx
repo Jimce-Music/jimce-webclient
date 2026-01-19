@@ -1,29 +1,30 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom/client'
 import { HashRouter, Routes, Route, Link } from 'react-router-dom'
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next'
 import './i18n/index.ts'
 
 import './styles/index.css'
 import './styles/error_pages/404_page_not_found.css'
 
-import Sidebar from './components/Sidebar.tsx';
-import { closeSettingsModal } from './components/Sidebar.tsx';
-import TopBar from './components/TopBar.tsx';
-import PlayBar from './components/PlayBar.tsx'
+import Sidebar from './components/Sidebar.tsx'
+import { closeSettingsModal } from './components/Sidebar.tsx'
+import TopBar from './components/TopBar.tsx'
+import { PlayerProvider } from './PlayerContext'
 
 import Dashboard from './pages/Dashboard'
-import Music from './pages/Music';
-import Podcasts from './pages/Podcasts';
-import Audiobooks from './pages/Audiobooks';
-import Favorites from './pages/Favorites';
-import Recent from './pages/Recent';
-import Library from './pages/Library';
+import Music from './pages/Music'
+import Podcasts from './pages/Podcasts'
+import Audiobooks from './pages/Audiobooks'
+import Favorites from './pages/Favorites'
+import Recent from './pages/Recent'
+import Library from './pages/Library'
 
-import SettingsModal from './modals/SettingsModal.tsx';
+import SettingsModal from './modals/SettingsModal.tsx'
 
 //
 import './init_api'
+import PlayBar from './components/PlayBar.tsx'
 //
 function App() {
   const [settingsOpen, setSettingsOpen] = useState(false);
@@ -43,23 +44,25 @@ function App() {
     <HashRouter>
       <SettingsModal open={settingsOpen} onClose={() => {setSettingsOpen(false); checkSettingsModal()}} />
       <div>
-        <Sidebar />
-        <TopBar />
-        <PlayBar />
-        <div className='app-container'>
-          <div className='pages-container'>
-            <Routes>
-              <Route path='*' element={<NotFound />} />
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/music" element={<Music />} />
-              <Route path="/podcasts" element={<Podcasts />} />
-              <Route path="/audiobooks" element={<Audiobooks />} />
-              <Route path="/favorites" element={<Favorites />} />
-              <Route path="/recent" element={<Recent />} />
-              <Route path="/library" element={<Library />} />
-            </Routes>
+        <PlayerProvider>
+          <Sidebar />
+          <TopBar />
+          <PlayBar />
+          <div className='app-container'>
+            <div className='pages-container'>
+              <Routes>
+                <Route path='*' element={<NotFound />} />
+                <Route path="/" element={<Dashboard />} />
+                <Route path="/music" element={<Music />} />
+                <Route path="/podcasts" element={<Podcasts />} />
+                <Route path="/audiobooks" element={<Audiobooks />} />
+                <Route path="/favorites" element={<Favorites />} />
+                <Route path="/recent" element={<Recent />} />
+                <Route path="/library" element={<Library />} />
+              </Routes>
+            </div>
           </div>
-        </div>
+        </PlayerProvider>
       </div>
     </HashRouter>
   )

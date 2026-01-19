@@ -1,47 +1,54 @@
-import { useState } from "react"
+import { useState } from "react";
+import { usePlayer } from "../PlayerContext";
 
 export default function Music() {
-  const [url, setUrl] = useState<string>("")
-  const [justDownload, setJustDownload] = useState<boolean>(false)
-  const [saveWhileStreaming, setSaveWhileStreaming] = useState<boolean>(false)
-
-  const [streamUrl, setStreamUrl] = useState<string>("")
+  const [url, setUrl] = useState<string>("");
+  const [justDownload, setJustDownload] = useState<boolean>(false);
+  const [saveWhileStreaming, setSaveWhileStreaming] = useState<boolean>(false);
+  const { play } = usePlayer();
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!url) return
+    e.preventDefault();
+    if (!url) return;
 
-    if(justDownload === true) {
-      console.log(`Just Download: ${justDownload}`)
+    if (justDownload === true) {
+      console.log(`Just Download: ${justDownload}`);
 
-      console.log("Abfragen von /request-play")
-      const requestRes = await fetch(`http://192.168.188.27:4002/request-play?identifier=${url}`)
-      const requestPlayData = await requestRes.json()
+      console.log("Abfragen von /request-play");
+      const requestRes = await fetch(`http://192.168.188.27:4002/request-play?identifier=${encodeURIComponent(url)}`);
+      const requestPlayData = await requestRes.json();
 
-      console.log("Abrufen von /download")
-      await fetch (`http://192.168.188.27:4002/download?id=${requestPlayData.uuid}`)
-    } else if(saveWhileStreaming === true) {
-      console.log(`Save While Streaming: ${saveWhileStreaming}`)
+      console.log("Abrufen von /download");
+      await fetch(`http://192.168.188.27:4002/download?id=${encodeURIComponent(requestPlayData.uuid)}`);
+    } else if (saveWhileStreaming === true) {
+      console.log(`Save While Streaming: ${saveWhileStreaming}`);
 
-      console.log("Abfragen von /request-play")
-      const requestRes = await fetch(`http://192.168.188.27:4002/request-play?identifier=${url}`)
-      const requestPlayData = await requestRes.json()
+      console.log("Abfragen von /request-play");
+      const requestRes = await fetch(`http://192.168.188.27:4002/request-play?identifier=${encodeURIComponent(url)}`);
+      const requestPlayData = await requestRes.json();
 
-      console.log("Abrufen von /stream")
-      const res = await fetch (`http://192.168.188.27:4002/stream?id=${requestPlayData.uuid}`)
-      const data = await res.json()
+      console.log("Abrufen von /stream");
+      const res = await fetch(`http://192.168.188.27:4002/stream?id=${encodeURIComponent(requestPlayData.uuid)}`);
+      const data = await res.json();
 
-      console.log("Abrufen von /download")
-      await fetch (`http://192.168.188.27:4002/download?id=${requestPlayData.uuid}`)
+      if (!data.success) return;
 
-      console.log(data)
-      if(!data.success) return
-
-      console.log(data.downloadedCallback)
-
-      setStreamUrl(data.downloadedCallback)
+      // WICHTIG: play muss mit der tatsächlich empfangenen URL aufgerufen werden,
+      // nicht mit dem (noch) nicht aktualisierten state variable
+      const streamUrl = data.downloadedCallback;
+      if (streamUrl) {
+        play(streamUrl);
+      }
+    } else {
+      // Optional: direkte Streaming-Variante ohne SaveWhileStreaming/JustDownload
+      const requestRes = await fetch(`http://192.168.188.27:4002/request-play?identifier=${encodeURIComponent(url)}`);
+      const requestPlayData = await requestRes.json();
+      const res = await fetch(`http://192.168.188.27:4002/stream?id=${encodeURIComponent(requestPlayData.uuid)}`);
+      const data = await res.json();
+      if (!data.success) return;
+      play(data.downloadedCallback);
     }
-  }
+  };
 
   return (
     <div>
@@ -60,10 +67,6 @@ export default function Music() {
         <br />
         <button type="submit">Abspielen</button>
       </form>
-
-      {streamUrl && (
-        <audio controls autoPlay src={streamUrl} />
-      )}
     </div>
-  )
+  );
 }
