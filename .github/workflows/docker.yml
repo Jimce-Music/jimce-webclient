@@ -24,8 +24,8 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build (docker-dev)
-        if: github.ref == 'refs/heads/docker-dev'
+      - name: Build (dev)
+        if: github.ref == 'refs/heads/dev'
         uses: docker/build-push-action@v5
         with:
           context: .
