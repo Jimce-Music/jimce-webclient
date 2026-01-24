@@ -1,15 +1,15 @@
 import { Link, useLocation } from 'react-router-dom';
 
 import '../styles/components/Sidebar.css';
-import Logo from '../assets/logo-no-bg.svg';
-import HomeIcon from '../assets/icons/home.svg';
-import MusicIcon from '../assets/icons/music.svg';
-import PodcastIcon from '../assets/icons/podcasts.svg';
-import AudiobookIcon from '../assets/icons/audiobook.svg';
-import FavoriteIcon from '../assets/icons/favorite.svg';
-import RecentIcon from '../assets/icons/recent.svg';
-import LibraryIcon from '../assets/icons/library_music.svg';
-import SettingsIcon from '../assets/icons/settings.svg';
+import Logo from '../assets/icons/sidebar/logo-no-bg.svg';
+import HomeIcon from '../assets/icons/sidebar/home.svg';
+import MusicIcon from '../assets/icons/sidebar/music.svg';
+import PodcastIcon from '../assets/icons/sidebar/podcasts.svg';
+import AudiobookIcon from '../assets/icons/sidebar/audiobook.svg';
+import FavoriteIcon from '../assets/icons/sidebar/favorite.svg';
+import RecentIcon from '../assets/icons/sidebar/recent.svg';
+import LibraryIcon from '../assets/icons/sidebar/library_music.svg';
+import SettingsIcon from '../assets/icons/sidebar/settings.svg';
 
 import '../main.tsx';
 
