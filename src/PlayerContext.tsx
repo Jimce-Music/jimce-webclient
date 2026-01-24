@@ -7,8 +7,10 @@ export function PlayerProvider({ children }: any) {
   const [src, setSrc] = useState<string | null>(null);
   const [volume, setVolumeState] = useState(1); // 0-1
   const [shouldPlay, setShouldPlay] = useState(false);
-  const [audioReady, setAudioReady] = useState(false); // Audio-Mount-Flag
+  const [audioReady, setAudioReady] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+
+  console.log(audioReady)
 
   // Play-Funktion: src setzen und play anfordern
   const play = (url: string) => {
