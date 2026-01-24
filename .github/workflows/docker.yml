@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-      - docker-dev
+      - dev
 
 permissions:
   contents: read
@@ -35,8 +35,10 @@ jobs:
         if: github.ref == 'refs/heads/main'
         uses: docker/build-push-action@v5
         with:
-          context: .
-          push: true
-          tags: |
-            ghcr.io/jimce-music/jimce-webclient:latest
-            ghcr.io/jimce-music/jimce-webclient:${{ github.sha }}
+            context: .
+            push: true
+            tags: |
+                ghcr.io/jimce-music/jimce-webclient:latest
+                ghcr.io/jimce-music/jimce-webclient:${{ github.sha }}
+            secrets: |
+                NPM_TOKEN=${{ secrets.NPM_TOKEN }}
