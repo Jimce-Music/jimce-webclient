@@ -1,10 +1,10 @@
 services:
   frontend:
-    image: ghcr.io/jimce-music/jimce-webclient:latest
+    build: .
     container_name: jimce-webclient
     restart: unless-stopped
     ports:
-      - "4003:4003"
+      - "5173:3000"
     networks:
       - app
 
