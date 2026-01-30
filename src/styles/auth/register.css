@@ -111,3 +111,8 @@
 .password-toggle-icon:hover {
     opacity: 1;
 }
+
+.register-error-message {
+    color: var(--accent-danger);
+    font-weight: bold;
+}

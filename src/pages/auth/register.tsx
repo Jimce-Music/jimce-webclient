@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import * as api from '@jimce-music/jimce-api-ts'
 
 import '../../styles/auth/register.css'
 
@@ -6,7 +7,6 @@ import visibility from '../../assets/icons/visibility.svg'
 import visibilityOff from '../../assets/icons/visibility_off.svg'
 import User from '../../assets/icons/user.svg'
 import Mail from '../../assets/icons/mail.svg'
-import { data } from 'react-router-dom'
 
 export default function Register() {
     const [username, setUsername] = useState('')
@@ -15,25 +15,52 @@ export default function Register() {
     const [confirmPassword, setConfirmPassword] = useState('')
     const [finalPassword, setFinalPassword] = useState('')
 
+    const [errorMessage, setErrorMessage] = useState('')
+
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-    
-    function submitRegister() {
-        comparePasswords()
-        console.log(username)
-        console.log(mail)
-        console.log(password)
-        console.log(confirmPassword)
-        console.log(finalPassword)
-    }
 
-    function comparePasswords() {
-        if(password === confirmPassword) {
-            setFinalPassword(password)
-        } else {
-            console.error("Passwords not the same!")
+    useEffect(() => {
+        async function fetchRegister() {
+            if (finalPassword !== "") {
+                console.log(username)
+                console.log(mail)
+                console.log(password)
+                console.log(confirmPassword)
+                console.log("FinalPassword wurde jetzt wirklich aktualisiert:", finalPassword);
+
+                
+                const req = await api.putApiAdminUsersCreateOrChange({
+                    body: {
+                        username: username,
+                        password: finalPassword,
+                        email: mail,
+                        isAdmin: false
+                    }
+                })
+
+                console.log(req.error)
+                console.log(req.data)
+            }
+        }
+
+        fetchRegister()
+    }, [finalPassword]);
+
+    function submitRegister() {
+        if(password.length < 12) {
+            console.error("Password to short!")
+            setErrorMessage('Password to short!')
             return
         }
+        if(password !== confirmPassword) {
+            console.error("Passwords not the same!")
+            setErrorMessage('Passwords not the same!')
+            return
+        } 
+        setFinalPassword(password)
+        setErrorMessage('')
+        // trigger useEffect async function fetchRegister()
     }
 
     return(
@@ -99,6 +126,10 @@ export default function Register() {
             <button className='register-btn' onClick={submitRegister}>
                 Registrieren
             </button>
+
+            {errorMessage !== '' ?
+                <span className='register-error-message'>{errorMessage}</span>
+            : <></>}
         </div>
     )
 }

@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom'
+import { data, Link } from 'react-router-dom'
+import * as api from '@jimce-music/jimce-api-ts'
 
 import '../../styles/auth/login.css'
 import '../../styles/checkbox.css'
@@ -9,10 +10,25 @@ import visibilityOff from '../../assets/icons/visibility_off.svg'
 import User from '../../assets/icons/user.svg'
 
 export default function Login() {
+    const [user, setUser] = useState('')
+    const [password, setPassword] = useState('')
+
     const [showPassword, setShowPassword] = useState(false);
 
-    function submitLogin() {
-        console.log("login completed")
+    async function submitLogin() {
+        const req = await api.postApiAuthLoginBasic({
+            body: {
+                username: user,
+                password: password
+            }
+        })
+
+        console.error(req.error)
+        console.log(req.data)
+        if(req.response.status !== 200) {
+            console.error("Login Failed!")
+            return
+        }
     }
 
     return(
@@ -23,7 +39,8 @@ export default function Login() {
                     className='login-input' 
                     type="text" 
                     placeholder="Benutzername / E-Mail" 
-                    id="user" 
+                    id="user"
+                    onChange={(e) => setUser(e.target.value)} 
                     required 
                 />
                 <img 
@@ -36,6 +53,7 @@ export default function Login() {
                     type={showPassword ? "text" : "password"} 
                     placeholder="Passwort" 
                     id="password" 
+                    onChange={(e) => setPassword(e.target.value)} 
                 />
                 <img 
                     src={showPassword ? visibilityOff : visibility} 

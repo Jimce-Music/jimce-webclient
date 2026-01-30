@@ -7,6 +7,9 @@ api.setConfig({
     // headers: {
     //     Authorization: 'Bearer <token>'
     // }
+    headers: {
+        Authorization: 'Bearer '
+    }
 })
 
 const pingRequest = api.getApiPing()
