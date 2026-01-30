@@ -20,6 +20,9 @@ import Favorites from './pages/Favorites'
 import Recent from './pages/Recent'
 import Library from './pages/Library'
 
+import Login from './pages/auth/login.tsx'
+import Register from './pages/auth/register.tsx'
+
 import SettingsModal from './modals/SettingsModal.tsx'
 
 //
@@ -59,6 +62,8 @@ function App() {
                 <Route path="/favorites" element={<Favorites />} />
                 <Route path="/recent" element={<Recent />} />
                 <Route path="/library" element={<Library />} />
+                <Route path="/auth/login" element={<Login />} />
+                <Route path="/auth/register" element={<Register />} />
               </Routes>
             </div>
           </div>

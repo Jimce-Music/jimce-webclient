@@ -1,0 +1,113 @@
+.register-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 350px;
+    min-width: 350px;
+    padding: 20px;
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+}
+
+.register-header {
+    color: var(--text-primary);
+    border-bottom: 2px solid var(--accent-primary);
+    padding-bottom: 12px;
+}
+
+.register-input {
+    text-decoration: none;
+    outline: none;
+    display: flex;
+    align-items: center;
+    background-color: var(--bg-surface);
+    border: 2px solid var(--accent-primary);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    padding: 10px 20px;
+    font-size: 15px;
+}
+
+.register-input {
+    text-decoration: none;
+    outline: none;
+    display: flex;
+    align-items: center;
+    background-color: var(--bg-surface);
+    border: 2px solid var(--accent-primary);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    padding: 10px 20px;
+    font-size: 15px;
+    transition: var(--transition-fast);
+}
+
+.register-input:hover {
+    transform: scale(1.02);
+}
+
+.register-input:focus {
+    transform: scale(1.02);
+    border-color: var(--accent-secondary);
+}
+
+.register-btn {
+    text-decoration: none;
+    outline: none;
+    border: none;
+    margin-top: 12px;
+    border-radius: var(--radius-sm);
+    font-size: 15px;
+    color: var(--text-primary);
+    background-color: var(--accent-primary);
+    padding: 10px 15px;
+    transition: var(--transition-base);
+}
+
+.register-btn:hover {
+    cursor: pointer;
+    background-color: var(--accent-secondary);
+    transform: scale(1.05);
+}
+
+.input-container {
+    position: relative;
+    width: 90%; /* Wichtig, damit die Breite konsistent bleibt */
+    display: flex;
+    align-items: center;
+}
+
+.input-container .register-input {
+    width: 100%;
+    padding-right: 45px; /* Platz für das Icon */
+}
+
+.input-container img {
+    position: absolute;
+    right: 15px; /* Abstand vom rechten Rand */
+    width: 20px;
+    height: 20px;
+    pointer-events: none; /* Verhindert, dass das Icon Klicks auf den Input blockiert */
+    opacity: 0.6;
+}
+
+/* Die Passwort-Icons brauchen weiterhin 'pointer-events: auto', damit sie klickbar sind */
+.password-toggle-icon {
+    pointer-events: auto !important; 
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+    user-select: none;
+}
+
+.password-toggle-icon:hover {
+    opacity: 1;
+}
