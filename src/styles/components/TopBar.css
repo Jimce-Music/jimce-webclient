@@ -20,6 +20,10 @@
     height: 30px;
 }
 
+.profile:hover {
+    cursor: pointer;
+}
+
 .search-bar {
     position: relative;
     width: 100%;
@@ -49,4 +53,53 @@
     width: 20px;
     height: 20px;
     pointer-events: none;
+}
+
+.profile-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.account-dropdown {
+    position: absolute;
+    top: 45px; /* Abstand nach unten zum Profilbild */
+    right: 0;   /* Rechtsbündig mit dem Container */
+    background-color: var(--bg-sidebar);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    min-width: 160px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    z-index: 100; /* Sicherstellen, dass es über anderen Inhalten liegt */
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none; /* Verhindert Klicks, wenn unsichtbar */
+    transition: all 0.2s ease-in-out;
+}
+
+.account-dropdown.show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto; /* Klicks wieder erlauben */
+}
+
+.account-dropdown a, 
+.account-dropdown .logout-btn {
+    padding: 10px 20px;
+    color: var(--text-primary);
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    font-size: 14px;
+    text-align: left;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: background-color var(--transition-base);
+}
+
+.account-dropdown a:hover, 
+.account-dropdown .logout-btn:hover {
+    background-color: var(--bg-hover);
 }

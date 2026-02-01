@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { data, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import * as api from '@jimce-music/jimce-api-ts'
 
 import '../../styles/auth/login.css'
@@ -25,10 +25,23 @@ export default function Login() {
 
         console.error(req.error)
         console.log(req.data)
+        const token = req.data?.token
         if(req.response.status !== 200) {
             console.error("Login Failed!")
             return
         }
+        if(token) {
+            localStorage.setItem('token', token)
+        }
+        if(token) {
+            api.setConfig ({
+                headers: {
+                    Authorization: 'Bearer ' + token
+                }
+            })
+        }
+        console.log('Gespeicherter Token:', localStorage.getItem('token'))
+        location.reload()
     }
 
     return(

@@ -27,8 +27,13 @@ export default function Register() {
                 console.log(mail)
                 console.log(password)
                 console.log(confirmPassword)
-                console.log("FinalPassword wurde jetzt wirklich aktualisiert:", finalPassword);
+                console.log(finalPassword);
 
+                const isAdmin = await api.getApiMeUserinfo ()
+                if(!isAdmin) {
+                    console.error('Attribute isAdmin not set!')
+                }
+                console.log(isAdmin.data?.isAdmin)
                 
                 const req = await api.putApiAdminUsersCreateOrChange({
                     body: {
