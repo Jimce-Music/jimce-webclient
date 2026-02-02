@@ -2,7 +2,6 @@ import '../utils/logout'
 import logout from '../utils/logout';
 import { Link } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
-import * as api from '@jimce-music/jimce-api-ts'
 
 import '../styles/components/TopBar.css';
 
@@ -11,8 +10,7 @@ import SearchIcon from '../assets/icons/search.svg';
 
 export default function TopBar() {
     const [isOpen, setIsOpen] = useState(false)
-    const [isAuthenticated, setIsAuthenticated] = useState(false)
-    const dropdownRef = useRef(null); // Referenz für den Container
+    const dropdownRef = useRef<HTMLDivElement>(null);
 
     const toggleDropdown = () => {
         setIsOpen(!isOpen)
@@ -23,33 +21,9 @@ export default function TopBar() {
         window.location.hash = '/'
     }
 
-    async function checkAuth() {
-        const token = localStorage.getItem('token');
-
-        if (!token) {
-            window.location.hash = '/auth/login'; 
-            return;
-        }
-
-        try {
-            const req = await api.getApiAuthCheckToken();
-
-            if (req.response.status === 200) {
-                console.log('Logged in!');
-                setIsAuthenticated(true);
-            } else {
-                console.warn('Token invalid!');
-                localStorage.removeItem('token');
-                window.location.hash = '/login.html';
-            }
-        } catch (error) {
-            console.error('Netzwerkfehler beim Auth-Check');
-        }
-    }
-
     useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (isOpen && dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (isOpen && dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
                 setIsOpen(false);
             }
         };

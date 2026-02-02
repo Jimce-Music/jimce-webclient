@@ -9,7 +9,6 @@ import './styles/index.css'
 import './styles/error_pages/404_page_not_found.css'
 
 import Sidebar from './components/Sidebar.tsx'
-import { closeSettingsModal } from './components/Sidebar.tsx'
 import TopBar from './components/TopBar.tsx'
 import { PlayerProvider } from './PlayerContext'
 
@@ -73,6 +72,8 @@ function App() {
       } finally {
         setIsChecking(false) 
       }
+
+      console.log("Auth-Status:", { isChecking, isAuthenticated })
     }
 
     initAuth() 
