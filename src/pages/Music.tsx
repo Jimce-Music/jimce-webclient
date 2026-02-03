@@ -12,41 +12,33 @@ export default function Music() {
     if (!url) return;
 
     if (justDownload === true) {
+      // JUST-DOWNLOAD
       console.log(`Just Download: ${justDownload}`);
 
       console.log("Abfragen von /request-play");
-      const requestRes = await fetch(`http://192.168.188.27:4002/request-play?identifier=${encodeURIComponent(url)}`);
-      const requestPlayData = await requestRes.json();
-
-      console.log("Abrufen von /download");
-      await fetch(`http://192.168.188.27:4002/download?id=${encodeURIComponent(requestPlayData.uuid)}`);
+      const requestRes = await fetch(`http://192.168.188.27:4002/request-play?identifier=${encodeURIComponent(url)}&just-download=${justDownload}`);
+      console.log(requestRes)
+      
     } else if (saveWhileStreaming === true) {
+      // SAVE-WHILE-STREAMING
       console.log(`Save While Streaming: ${saveWhileStreaming}`);
 
       console.log("Abfragen von /request-play");
-      const requestRes = await fetch(`http://192.168.188.27:4002/request-play?identifier=${encodeURIComponent(url)}`);
-      const requestPlayData = await requestRes.json();
-
-      console.log("Abrufen von /stream");
-      const res = await fetch(`http://192.168.188.27:4002/stream?id=${encodeURIComponent(requestPlayData.uuid)}`);
-      const data = await res.json();
+      const requestRes = await fetch(`http://192.168.188.27:4002/request-play?identifier=${encodeURIComponent(url)}&save-while-streaming=${saveWhileStreaming}`);
+      const data = await requestRes.json();
 
       if (!data.success) return;
-
-      // WICHTIG: play muss mit der tatsächlich empfangenen URL aufgerufen werden,
-      // nicht mit dem (noch) nicht aktualisierten state variable
-      const streamUrl = data.downloadedCallback;
+      // Call of play function
+      const streamUrl = data.streamUrl;
       if (streamUrl) {
         play(streamUrl);
       }
     } else {
-      // Optional: direkte Streaming-Variante ohne SaveWhileStreaming/JustDownload
+      // Optional: direct Streaming-Method without SaveWhileStreaming/JustDownload
       const requestRes = await fetch(`http://192.168.188.27:4002/request-play?identifier=${encodeURIComponent(url)}`);
-      const requestPlayData = await requestRes.json();
-      const res = await fetch(`http://192.168.188.27:4002/stream?id=${encodeURIComponent(requestPlayData.uuid)}`);
-      const data = await res.json();
+      const data = await requestRes.json();
       if (!data.success) return;
-      play(data.downloadedCallback);
+      play(data.streamUrl);
     }
   };
 
