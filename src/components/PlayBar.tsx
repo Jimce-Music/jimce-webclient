@@ -27,7 +27,7 @@ function formatTime(seconds: number | null) {
 }
 
 export default function PlayBar() {
-  const { audioRef, src, setVolume, togglePlay, isPlaying } = usePlayer();
+  const { audioRef, src, setVolume, togglePlay, isPlaying, currentTrack } = usePlayer();
 
   const [volume, setVol] = useState<number>(100);
   const [recentVolume, setRecentVolume] = useState<number>(100);
@@ -155,13 +155,13 @@ export default function PlayBar() {
     <div className="playbar">
       <div className="playbar-left">
         <div className="playbar-left-song">
-          <img src="https://i.ytimg.com/vi/RkkdYdWMfQ0/hqdefault.jpg" className="song-img" />
+          <img src={currentTrack?.thumbnail} className="song-img" alt={currentTrack?.title} />
           <div className="playbar-left-song-info">
-            <a href="https://www.youtube.com/watch?v=RkkdYdWMfQ0" className="playbar-left-song-info-name">
-              🔈BASS BOOSTED🔈 CAR MUSIC MIX 2018 🔥 BEST EDM, BOUNCE, ELECTRO HOUSE #3
+            <a href={currentTrack?.link} className="playbar-left-song-info-name">
+              {currentTrack?.title}
             </a>
-            <a href="https://www.youtube.com/@BassMusicMovement" className="playbar-left-song-info-author">
-              Bass Music Movement
+            <a href={currentTrack?.link} className="playbar-left-song-info-author">
+              {currentTrack?.artist}
             </a>
           </div>
         </div>
@@ -213,6 +213,7 @@ export default function PlayBar() {
           onClick={muteVolume}
         />
         <input
+          className="playbar-right-volume-control"
           type="range"
           min="0"
           max="100"

@@ -1,7 +1,7 @@
 services:
   frontend:
-    image: ghcr.io/jimce-music/jimce-webclient:latest
-    container_name: jimce-webclient
+    build: .
+    container_name: jimce-webclient-dev
     restart: unless-stopped
     ports:
       - "5173:3000"

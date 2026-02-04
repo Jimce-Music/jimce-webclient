@@ -87,6 +87,10 @@
     margin-left: 12px;
 }
 
+.playbar-right-volume-control {
+    width: 8rem;
+}
+
 .playbar-right-element {
     width: 25px;
     height: 25px;
