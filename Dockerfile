@@ -4,12 +4,13 @@ WORKDIR /app
 # Kopiere package.json
 COPY package*.json ./
 
-# Wir übergeben den Token direkt als Build-Argument/Secret in die Umgebung
+# Wir bauen die .npmrc direkt im RAM während des Installs zusammen
 RUN --mount=type=secret,id=npmrc_token \
-    NODE_AUTH_TOKEN=$(cat /run/secrets/npmrc_token) \
-    npm config set //npm.pkg.github.com/:_authToken ${NODE_AUTH_TOKEN} && \
-    npm config set @jimce-music:registry https://npm.pkg.github.com && \
-    npm install
+    export TOKEN=$(cat /run/secrets/npmrc_token) && \
+    echo "@jimce-music:registry=https://npm.pkg.github.com" > .npmrc && \
+    echo "//npm.pkg.github.com/:_authToken=$TOKEN" >> .npmrc && \
+    npm install && \
+    rm .npmrc
 
 # Erst JETZT den restlichen Code kopieren (minus .npmrc wegen .dockerignore)
 COPY . .
