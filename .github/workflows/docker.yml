@@ -19,10 +19,10 @@ jobs:
       # Schritt zum Erstellen der .npmrc
       - name: Setup .npmrc
         run: |
-          cat << EOF > .npmrc
-          @jimce-music:registry=https://npm.pkg.github.com
-          //npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}
-          EOF
+          echo "@jimce-music:registry=https://npm.pkg.github.com" > .npmrc
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}" >> .npmrc
+          # Zusätzlich für alle Fälle die globale Registry setzen:
+          echo "registry=https://registry.npmjs.org/" >> .npmrc
 
       - name: Login GHCR
         if: github.ref == 'refs/heads/main'
