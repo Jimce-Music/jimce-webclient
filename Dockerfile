@@ -1,11 +1,12 @@
 FROM node:20-alpine
 WORKDIR /app
 
-# Nur Package-Dateien kopieren für besseres Caching
+# Kopiere package.json
 COPY package*.json ./
 
-# Secret mounten und installieren
+# Mount an zwei Stellen gleichzeitig (Arbeitsverzeichnis UND Root-Home)
 RUN --mount=type=secret,id=npmrc,target=/app/.npmrc \
+    --mount=type=secret,id=npmrc,target=/root/.npmrc \
     npm install
 
 # Erst JETZT den restlichen Code kopieren (minus .npmrc wegen .dockerignore)
