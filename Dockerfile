@@ -4,9 +4,11 @@ WORKDIR /app
 # Kopiere package.json
 COPY package*.json ./
 
-# Mount an zwei Stellen gleichzeitig (Arbeitsverzeichnis UND Root-Home)
-RUN --mount=type=secret,id=npmrc,target=/app/.npmrc \
-    --mount=type=secret,id=npmrc,target=/root/.npmrc \
+# Wir übergeben den Token direkt als Build-Argument/Secret in die Umgebung
+RUN --mount=type=secret,id=npmrc_token \
+    NODE_AUTH_TOKEN=$(cat /run/secrets/npmrc_token) \
+    npm config set //npm.pkg.github.com/:_authToken ${NODE_AUTH_TOKEN} && \
+    npm config set @jimce-music:registry https://npm.pkg.github.com && \
     npm install
 
 # Erst JETZT den restlichen Code kopieren (minus .npmrc wegen .dockerignore)
