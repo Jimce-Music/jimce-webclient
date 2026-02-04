@@ -31,14 +31,29 @@ export default function Music() {
       // Call of play function
       const streamUrl = data.streamUrl;
       if (streamUrl) {
-        play(streamUrl);
+        play({
+          url: data.streamUrl, // Mapping falls nötig, dein Context nutzt "url" oder "streamUrl"
+          streamUrl: data.streamUrl,
+          title: data.title,
+          artist: data.artist,
+          thumbnail: data.thumbnail,
+          link: data.link
+        })
       }
     } else {
       // Optional: direct Streaming-Method without SaveWhileStreaming/JustDownload
       const requestRes = await fetch(`http://192.168.188.27:4002/request-play?identifier=${encodeURIComponent(url)}`);
       const data = await requestRes.json();
+
       if (!data.success) return;
-      play(data.streamUrl);
+      play({
+        url: data.streamUrl, // Mapping falls nötig, dein Context nutzt "url" oder "streamUrl"
+        streamUrl: data.streamUrl,
+        title: data.title,
+        artist: data.artist,
+        thumbnail: data.thumbnail,
+        link: data.link
+      })
     }
   };
 

@@ -2,6 +2,14 @@ import { createContext, useContext, useEffect, useRef, useState } from "react";
 
 const PlayerContext = createContext<any>(null);
 
+export interface Track {
+  url: string;
+  title: string;
+  artist: string;
+  thumbnail: string;
+  link?: string;
+}
+
 export function PlayerProvider({ children }: any) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [src, setSrc] = useState<string | null>(null);
@@ -9,12 +17,13 @@ export function PlayerProvider({ children }: any) {
   const [shouldPlay, setShouldPlay] = useState(false);
   const [audioReady, setAudioReady] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [currentTrack, setCurrentTrack] = useState<Track | null>(null);
 
   console.log(audioReady)
 
-  // Play-Funktion: src setzen und play anfordern
-  const play = (url: string) => {
-    setSrc(url);
+  const play = (trackData: any) => {
+    setSrc(trackData.streamUrl || trackData.url); 
+    setCurrentTrack(trackData); // Saves Titel, Artist, Thumbnail
     setShouldPlay(true);
   };
 
@@ -89,7 +98,15 @@ export function PlayerProvider({ children }: any) {
   }, [src, shouldPlay, volume]);
 
   return (
-    <PlayerContext.Provider value={{ audioRef, play, togglePlay, setVolume, src, isPlaying }}>
+    <PlayerContext.Provider value={{ 
+      audioRef, 
+      play, 
+      togglePlay, 
+      setVolume, 
+      src, 
+      isPlaying ,
+      currentTrack
+    }}>
       {children}
       {/* Ein einziges, zentrale Audio-Element */}
       <audio ref={audioRef} style={{ display: "none" }} />
