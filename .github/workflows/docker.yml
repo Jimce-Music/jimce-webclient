@@ -51,4 +51,4 @@ jobs:
             ghcr.io/jimce-music/jimce-webclient:latest
             ghcr.io/jimce-music/jimce-webclient:${{ github.sha }}
           secrets: |
-            npmrc=./.npmrc
+            "npmrc_token=${{ secrets.NPM_TOKEN }}"
