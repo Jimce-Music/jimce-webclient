@@ -1,6 +1,8 @@
 services:
   frontend:
-    build: .
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
     container_name: jimce-webclient-dev
     restart: unless-stopped
     ports:
