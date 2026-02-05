@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import * as api from '@jimce-music/jimce-api-ts'
 
@@ -43,6 +43,15 @@ export default function Login() {
         console.log('Gespeicherter Token:', localStorage.getItem('token'))
         location.reload()
     }
+
+    useEffect(() => {
+        const handleEnter = (event: any) => {
+            if (event.key === 'Enter') submitLogin()
+        }
+        document.addEventListener('keydown', handleEnter)
+
+        return () => document.removeEventListener('keydown', handleEnter)
+    }, [submitLogin])
 
     return (
         <div className='login-modal'>

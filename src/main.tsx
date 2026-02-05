@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom/client'
-import { HashRouter, Routes, Route, Link } from 'react-router-dom'
+import { HashRouter, Routes, Route } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import './i18n/index.ts'
 import * as api from '@jimce-music/jimce-api-ts'
@@ -86,6 +86,14 @@ function App() {
         window.location.hash.includes('/auth/login') ||
         window.location.hash.includes('/auth/register')
 
+    if(isChecking) {
+        return (
+            <div className="loading-container">
+                <div className="loading-spinner"></div>
+            </div>
+        )
+    }
+
     return (
         <HashRouter>
             <SettingsModal
@@ -106,7 +114,14 @@ function App() {
                 <div className={!isAuthPage ? 'app-container' : ''}>
                     <div className={!isAuthPage ? 'pages-container' : ''}>
                         <Routes>
-                            <Route path='*' element={<NotFound />} />
+                            <Route
+                                path='*'
+                                element={
+                                    <NotFound
+                                        isAuthenticated={isAuthenticated}
+                                    />
+                                }
+                            />
                             <Route path='/' element={<Dashboard />} />
                             <Route path='/music' element={<Music />} />
                             <Route path='/podcasts' element={<Podcasts />} />
@@ -130,16 +145,29 @@ function App() {
     )
 }
 
-function NotFound() {
+function NotFound({ isAuthenticated }: { isAuthenticated: boolean }) {
     const { t } = useTranslation()
+
+    const handleHomePage = () => {
+    if (isAuthenticated === true) {
+        window.location.hash = '/'
+    } else {
+        window.location.hash = '/auth/login'
+    }
+}
 
     return (
         <div className='page_not_found_container'>
             <h1>{t('NotFound.Title')}</h1>
             <p style={{ fontSize: '18px' }}>{t('NotFound.Message')}</p>
-            <Link className='home_button' to='/'>
+            <button
+                className='home_button'
+                onClick={() => {
+                    handleHomePage()
+                }}
+            >
                 {t('NotFound.GoHomeButton')}
-            </Link>
+            </button>
         </div>
     )
 }

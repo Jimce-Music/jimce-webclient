@@ -10,13 +10,20 @@ import SearchIcon from '../assets/icons/search.svg'
 
 export default function TopBar() {
     const [isOpen, setIsOpen] = useState(false)
+    const [isActive, setIsActive] = useState(false)
     const dropdownRef = useRef<HTMLDivElement>(null)
 
     const toggleDropdown = () => {
         setIsOpen(!isOpen)
     }
 
+    const toggleModal = () => {
+        setIsActive(!isActive)
+        setIsOpen(false)
+    }
+
     const handleLogout = () => {
+        setIsActive(false)
         logout()
         window.location.hash = '/'
     }
@@ -63,9 +70,35 @@ export default function TopBar() {
                     <Link to='/change-password' onClick={toggleDropdown}>
                         Passwort ändern
                     </Link>
-                    <button onClick={handleLogout} className='logout-btn'>
+                    <button onClick={toggleModal} className='logout-btn'>
                         Abmelden
                     </button>
+                </div>
+            </div>
+
+            <div
+                className={`logout-modal-backdrop ${isActive ? 'active' : ''}`}
+                onClick={() => toggleModal}
+            >
+                <div className={`logout-modal ${isActive ? 'active' : ''}`}>
+                    <h1 className='logout-modal-title'>
+                        Möchtest du dich wirklich ausloggen?
+                    </h1>
+                    <div className='logout-modal-title-underline'></div>
+                    <div className='logout-modal-options'>
+                        <button
+                            className='logout-modal-confirm'
+                            onClick={() => setIsActive(false)}
+                        >
+                            Abbrechen
+                        </button>
+                        <button
+                            className='logout-modal-cancel'
+                            onClick={handleLogout}
+                        >
+                            Bestätigen
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
