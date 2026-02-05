@@ -1,13 +1,12 @@
-import '../styles/modals/SettingsModal.css';
+import '../styles/modals/SettingsModal.css'
 
 interface Props {
-  open: boolean;
-  onClose: () => void;
+    open: boolean
+    onClose: () => void
 }
 
 export default function SettingsModal({ open, onClose }: Props) {
-
-    return(
+    return (
         <div
             className={`settings-modal-backdrop ${open ? 'active' : ''}`}
             onClick={() => onClose()}
@@ -16,8 +15,8 @@ export default function SettingsModal({ open, onClose }: Props) {
                 className={`settings-modal ${open ? 'active' : ''}`}
                 onClick={(e) => e.stopPropagation()}
             >
-                <div className="settings-sidebar">
-                    <div className="settings-sidebar-top">
+                <div className='settings-sidebar'>
+                    <div className='settings-sidebar-top'>
                         <a className='settings-sidebar-option active'>Konto</a>
                         <a className='settings-sidebar-option'>Design</a>
                         <a className='settings-sidebar-option'>Sprache</a>
@@ -28,19 +27,30 @@ export default function SettingsModal({ open, onClose }: Props) {
 
                         <div className='settings-sidebar-title'>Bibliothek</div>
                         <a className='settings-sidebar-option'>Downloads</a>
-                        <a className='settings-sidebar-option'>Kompaktes Layout</a>
+                        <a className='settings-sidebar-option'>
+                            Kompaktes Layout
+                        </a>
                     </div>
-                    
-                    <div className="settings-sidebar-bottom">
-                        <a href='https://github.com/Jimce-Music/jimce-webclient.git' className="settings-sidebar-option">About Jimce</a>
-                        <a href='https://github.com/Jimce-Music/jimce-webclient/issues' className="settings-sidebar-option">Hilfe</a>
+
+                    <div className='settings-sidebar-bottom'>
+                        <a
+                            href='https://github.com/Jimce-Music/jimce-webclient.git'
+                            className='settings-sidebar-option'
+                        >
+                            About Jimce
+                        </a>
+                        <a
+                            href='https://github.com/Jimce-Music/jimce-webclient/issues'
+                            className='settings-sidebar-option'
+                        >
+                            Hilfe
+                        </a>
                     </div>
                 </div>
-                <div className="settings-content">
+                <div className='settings-content'>
                     <h1>Einstellungen</h1>
                     <div className='settings-content-component'>
                         <h2 className='settings-content-title'>Konto</h2>
-                        
                     </div>
                     <div className='settings-content-component'>
                         <h2 className='settings-content-title'>Design</h2>
@@ -58,11 +68,12 @@ export default function SettingsModal({ open, onClose }: Props) {
                         <h2 className='settings-content-title'>Downloads</h2>
                     </div>
                     <div className='settings-content-component'>
-                        <h2 className='settings-content-title'>Kompaktes Layout</h2>
+                        <h2 className='settings-content-title'>
+                            Kompaktes Layout
+                        </h2>
                     </div>
                 </div>
             </div>
         </div>
-        
     )
 }

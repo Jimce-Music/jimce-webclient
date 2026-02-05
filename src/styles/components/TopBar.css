@@ -64,7 +64,7 @@
 .account-dropdown {
     position: absolute;
     top: 45px; /* Abstand nach unten zum Profilbild */
-    right: 0;   /* Rechtsbündig mit dem Container */
+    right: 0; /* Rechtsbündig mit dem Container */
     background-color: var(--bg-sidebar);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
@@ -85,7 +85,7 @@
     pointer-events: auto; /* Klicks wieder erlauben */
 }
 
-.account-dropdown a, 
+.account-dropdown a,
 .account-dropdown .logout-btn {
     padding: 10px 20px;
     color: var(--text-primary);
@@ -99,7 +99,7 @@
     transition: background-color var(--transition-base);
 }
 
-.account-dropdown a:hover, 
+.account-dropdown a:hover,
 .account-dropdown .logout-btn:hover {
     background-color: var(--bg-hover);
 }

@@ -17,24 +17,24 @@ export default function Register() {
 
     const [errorMessage, setErrorMessage] = useState('')
 
-    const [showPassword, setShowPassword] = useState(false);
-    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [showPassword, setShowPassword] = useState(false)
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
     useEffect(() => {
         async function fetchRegister() {
-            if (finalPassword !== "") {
+            if (finalPassword !== '') {
                 console.log(username)
                 console.log(mail)
                 console.log(password)
                 console.log(confirmPassword)
-                console.log(finalPassword);
+                console.log(finalPassword)
 
-                const isAdmin = await api.getApiMeUserinfo ()
-                if(!isAdmin) {
+                const isAdmin = await api.getApiMeUserinfo()
+                if (!isAdmin) {
                     console.error('Attribute isAdmin not set!')
                 }
                 console.log(isAdmin.data?.isAdmin)
-                
+
                 const req = await api.putApiAdminUsersCreateOrChange({
                     body: {
                         username: username,
@@ -50,81 +50,77 @@ export default function Register() {
         }
 
         fetchRegister()
-    }, [finalPassword]);
+    }, [finalPassword])
 
     function submitRegister() {
-        if(password.length < 12) {
-            console.error("Password to short!")
+        if (password.length < 12) {
+            console.error('Password to short!')
             setErrorMessage('Password to short!')
             return
         }
-        if(password !== confirmPassword) {
-            console.error("Passwords not the same!")
+        if (password !== confirmPassword) {
+            console.error('Passwords not the same!')
             setErrorMessage('Passwords not the same!')
             return
-        } 
+        }
         setFinalPassword(password)
         setErrorMessage('')
         // trigger useEffect async function fetchRegister()
     }
 
-    return(
-        <div className="register-modal">
+    return (
+        <div className='register-modal'>
             <h1 className='register-header'>Jimce Registrierung</h1>
             <div className='input-container'>
-                <input 
-                    className="register-input" 
-                    type="text" 
-                    placeholder='Benutzername' 
-                    id="username" 
+                <input
+                    className='register-input'
+                    type='text'
+                    placeholder='Benutzername'
+                    id='username'
                     onChange={(e) => setUsername(e.target.value)}
                 />
-                <img 
-                    src={User} 
-                />
+                <img src={User} />
             </div>
             <div className='input-container'>
-                <input 
-                    className='register-input' 
-                    type="email" 
-                    placeholder="E-Mail" 
-                    id="email" 
+                <input
+                    className='register-input'
+                    type='email'
+                    placeholder='E-Mail'
+                    id='email'
                     onChange={(e) => setMail(e.target.value)}
                 />
-                <img 
-                    src={Mail} 
-                />
+                <img src={Mail} />
             </div>
-            
-            <div className="input-container">
-                <input 
-                    className='register-input' 
-                    type={showPassword ? "text" : "password"} 
-                    placeholder="Passwort" 
-                    id="password" 
+
+            <div className='input-container'>
+                <input
+                    className='register-input'
+                    type={showPassword ? 'text' : 'password'}
+                    placeholder='Passwort'
+                    id='password'
                     onChange={(e) => setPassword(e.target.value)}
                 />
-                <img 
-                    src={showPassword ? visibilityOff : visibility} 
-                    className="password-toggle-icon"
+                <img
+                    src={showPassword ? visibilityOff : visibility}
+                    className='password-toggle-icon'
                     onClick={() => setShowPassword(!showPassword)}
-                    alt="Anzeigen"
+                    alt='Anzeigen'
                 />
             </div>
 
-            <div className="input-container">
-                <input 
-                    className='register-input' 
-                    type={showConfirmPassword ? "text" : "password"} 
-                    placeholder="Passwort wiederholen" 
-                    id="repeat-password" 
+            <div className='input-container'>
+                <input
+                    className='register-input'
+                    type={showConfirmPassword ? 'text' : 'password'}
+                    placeholder='Passwort wiederholen'
+                    id='repeat-password'
                     onChange={(e) => setConfirmPassword(e.target.value)}
                 />
-                <img 
-                    src={showConfirmPassword ? visibilityOff : visibility} 
-                    className="password-toggle-icon"
+                <img
+                    src={showConfirmPassword ? visibilityOff : visibility}
+                    className='password-toggle-icon'
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    alt="Anzeigen"
+                    alt='Anzeigen'
                 />
             </div>
 
@@ -132,9 +128,11 @@ export default function Register() {
                 Registrieren
             </button>
 
-            {errorMessage !== '' ?
+            {errorMessage !== '' ? (
                 <span className='register-error-message'>{errorMessage}</span>
-            : <></>}
+            ) : (
+                <></>
+            )}
         </div>
     )
 }

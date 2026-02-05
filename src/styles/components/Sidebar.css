@@ -22,7 +22,9 @@ a {
     gap: 20px;
 }
 
-.menu, .library, .settings {
+.menu,
+.library,
+.settings {
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -36,7 +38,8 @@ a {
     border-bottom: none;
 }
 
-.menu-title, .library-title {
+.menu-title,
+.library-title {
     color: var(--text-secondary);
     margin: 0;
 }
