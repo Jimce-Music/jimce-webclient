@@ -22,9 +22,8 @@
 }
 
 /* =====================================================
-   NEON THEME (DEFAULT)
+   NEON THEME
    ===================================================== */
-:root,
 [data-theme='neon'] {
     --bg-main: #0b1120;
     --bg-sidebar: #0f172a;
@@ -108,8 +107,9 @@
 }
 
 /* =====================================================
-   BLACK THEME
+   BLACK THEME (DEFAULT)
    ===================================================== */
+:root,
 [data-theme='black'] {
     --bg-main: #0a0a0a;
     --bg-sidebar: #050505;
@@ -164,27 +164,6 @@ input[type='range'] {
     accent-color: var(--accent-primary);
 }
 
-/* =====================================================
-   SCROLLBAR (GLOBAL)
-   ===================================================== */
-::-webkit-scrollbar {
-    width: var(--scrollbar-size);
-    height: var(--scrollbar-size);
-}
-
-::-webkit-scrollbar-track {
-    background: var(--scrollbar-track);
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--scrollbar-thumb);
-    border-radius: 999px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: var(--scrollbar-thumb-hover);
-}
-
 /* Der Hintergrund-Container */
 .loading-container {
     position: fixed;
@@ -214,4 +193,25 @@ input[type='range'] {
 @keyframes spin {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
+}
+
+/* =====================================================
+   SCROLLBAR (GLOBAL)
+   ===================================================== */
+::-webkit-scrollbar {
+    width: var(--scrollbar-size);
+    height: var(--scrollbar-size);
+}
+
+::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-thumb-hover);
 }

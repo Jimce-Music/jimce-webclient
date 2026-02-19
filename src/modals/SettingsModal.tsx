@@ -6,14 +6,19 @@ interface Props {
 }
 
 export default function SettingsModal({ open, onClose }: Props) {
+    const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (e.target === e.currentTarget) {
+            onClose();
+        }
+    };
+
     return (
         <div
             className={`settings-modal-backdrop ${open ? 'active' : ''}`}
-            onClick={() => onClose()}
+            onClick={handleBackdropClick}
         >
             <div
                 className={`settings-modal ${open ? 'active' : ''}`}
-                onClick={(e) => e.stopPropagation()}
             >
                 <div className='settings-sidebar'>
                     <div className='settings-sidebar-top'>

@@ -105,7 +105,9 @@ function App() {
                 {/* Sidebar und Bars nur anzeigen, wenn NICHT auf Login/Register-Seite */}
                 {!isAuthPage && (
                     <>
-                        <Sidebar />
+                        <Sidebar
+                            onOpen={() => setSettingsOpen(true)}
+                        />
                         <TopBar />
                         <PlayBar />
                     </>

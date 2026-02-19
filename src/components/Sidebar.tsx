@@ -15,19 +15,11 @@ import '../main.tsx'
 
 import { useTranslation } from 'react-i18next'
 
-function openSettingsModal() {
-    document.querySelector('.settings-modal-backdrop')?.classList.add('active')
-    document.querySelector('.settings-modal')?.classList.add('active')
+interface Props {
+    onOpen: () => void
 }
 
-export function closeSettingsModal() {
-    document
-        .querySelector('.settings-modal-backdrop')
-        ?.classList.remove('active')
-    document.querySelector('.settings-modal')?.classList.remove('active')
-}
-
-export default function Sidebar() {
+export default function Sidebar({ onOpen }: Props) {
     const { t } = useTranslation()
     const location = useLocation()
 
@@ -111,9 +103,7 @@ export default function Sidebar() {
                         return (
                             <a
                                 key={item.name}
-                                onClick={() => {
-                                    openSettingsModal()
-                                }}
+                                onClick={() => onOpen()}
                                 className={'menu-option'}
                             >
                                 <img
