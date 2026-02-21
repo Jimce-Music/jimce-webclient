@@ -2,6 +2,7 @@ import '../utils/logout'
 import logout from '../utils/logout'
 import { Link } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import '../styles/components/TopBar.css'
 
@@ -9,6 +10,7 @@ import UserIcon from '../assets/icons/user.svg'
 import SearchIcon from '../assets/icons/search.svg'
 
 export default function TopBar() {
+    const { t } = useTranslation()
     const [isOpen, setIsOpen] = useState(false)
     const [isActive, setIsActive] = useState(false)
     const dropdownRef = useRef<HTMLDivElement>(null)
@@ -68,10 +70,10 @@ export default function TopBar() {
 
                 <div className={`account-dropdown ${isOpen ? 'show' : ''}`}>
                     <Link to='/change-password' onClick={toggleDropdown}>
-                        Passwort ändern
+                        {t("TopBar.Profile.changePassword")}
                     </Link>
                     <button onClick={toggleModal} className='logout-btn'>
-                        Abmelden
+                        {t("TopBar.Profile.logout")}
                     </button>
                 </div>
             </div>
@@ -82,7 +84,7 @@ export default function TopBar() {
             >
                 <div className={`logout-modal ${isActive ? 'active' : ''}`}>
                     <h1 className='logout-modal-title'>
-                        Möchtest du dich wirklich ausloggen?
+                        {t("TopBar.logoutModal.title")}
                     </h1>
                     <div className='logout-modal-title-underline'></div>
                     <div className='logout-modal-options'>
@@ -90,13 +92,13 @@ export default function TopBar() {
                             className='logout-modal-confirm'
                             onClick={() => setIsActive(false)}
                         >
-                            Abbrechen
+                            {t("TopBar.logoutModal.cancel")}
                         </button>
                         <button
                             className='logout-modal-cancel'
                             onClick={handleLogout}
                         >
-                            Bestätigen
+                            {t("TopBar.logoutModal.confirm")}
                         </button>
                     </div>
                 </div>

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import * as api from '@jimce-music/jimce-api-ts'
+import { useTranslation } from 'react-i18next'
 
 import '../../styles/auth/register.css'
 
@@ -9,6 +10,7 @@ import User from '../../assets/icons/user.svg'
 import Mail from '../../assets/icons/mail.svg'
 
 export default function Register() {
+    const { t } = useTranslation()
     const [username, setUsername] = useState('')
     const [mail, setMail] = useState('')
     const [password, setPassword] = useState('')
@@ -70,12 +72,12 @@ export default function Register() {
 
     return (
         <div className='register-modal'>
-            <h1 className='register-header'>Jimce Registrierung</h1>
+            <h1 className='register-header'>{t("Registrer.title")}</h1>
             <div className='input-container'>
                 <input
                     className='register-input'
                     type='text'
-                    placeholder='Benutzername'
+                    placeholder={t("Registrer.placeholder.username")}
                     id='username'
                     onChange={(e) => setUsername(e.target.value)}
                 />
@@ -85,7 +87,7 @@ export default function Register() {
                 <input
                     className='register-input'
                     type='email'
-                    placeholder='E-Mail'
+                    placeholder={t("Registrer.placeholder.email")}
                     id='email'
                     onChange={(e) => setMail(e.target.value)}
                 />
@@ -96,7 +98,7 @@ export default function Register() {
                 <input
                     className='register-input'
                     type={showPassword ? 'text' : 'password'}
-                    placeholder='Passwort'
+                    placeholder={t("Registrer.placeholder.password")}
                     id='password'
                     onChange={(e) => setPassword(e.target.value)}
                 />
@@ -104,7 +106,6 @@ export default function Register() {
                     src={showPassword ? visibilityOff : visibility}
                     className='password-toggle-icon'
                     onClick={() => setShowPassword(!showPassword)}
-                    alt='Anzeigen'
                 />
             </div>
 
@@ -112,7 +113,7 @@ export default function Register() {
                 <input
                     className='register-input'
                     type={showConfirmPassword ? 'text' : 'password'}
-                    placeholder='Passwort wiederholen'
+                    placeholder={t("Registrer.placeholder.confirmPassword")}
                     id='repeat-password'
                     onChange={(e) => setConfirmPassword(e.target.value)}
                 />
@@ -120,12 +121,11 @@ export default function Register() {
                     src={showConfirmPassword ? visibilityOff : visibility}
                     className='password-toggle-icon'
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    alt='Anzeigen'
                 />
             </div>
 
             <button className='register-btn' onClick={submitRegister}>
-                Registrieren
+                {t("Registrer.registrer")}
             </button>
 
             {errorMessage !== '' ? (

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import * as api from '@jimce-music/jimce-api-ts'
+import { useTranslation } from 'react-i18next'
 
 import '../../styles/auth/login.css'
 import '../../styles/checkbox.css'
@@ -10,6 +11,7 @@ import visibilityOff from '../../assets/icons/visibility_off.svg'
 import User from '../../assets/icons/user.svg'
 
 export default function Login() {
+    const { t } = useTranslation()
     const [user, setUser] = useState('')
     const [password, setPassword] = useState('')
 
@@ -55,12 +57,12 @@ export default function Login() {
 
     return (
         <div className='login-modal'>
-            <h1 className='login-header'>Jimce Anmeldung</h1>
+            <h1 className='login-header'>{t("Login.title")}</h1>
             <div className='input-container'>
                 <input
                     className='login-input'
                     type='text'
-                    placeholder='Benutzername / E-Mail'
+                    placeholder={t("Login.placeholder.user")}
                     id='user'
                     onChange={(e) => setUser(e.target.value)}
                     required
@@ -71,7 +73,7 @@ export default function Login() {
                 <input
                     className='register-input'
                     type={showPassword ? 'text' : 'password'}
-                    placeholder='Passwort'
+                    placeholder={t("Login.placeholder.password")}
                     id='password'
                     onChange={(e) => setPassword(e.target.value)}
                 />
@@ -79,18 +81,17 @@ export default function Login() {
                     src={showPassword ? visibilityOff : visibility}
                     className='password-toggle-icon'
                     onClick={() => setShowPassword(!showPassword)}
-                    alt='Anzeigen'
                 />
             </div>
             <div className='remember'>
                 <input type='checkbox' id='remember' className='ui-checkbox' />
-                <label htmlFor='remember'>Angemeldet bleiben</label>
+                <label htmlFor='remember'>{t("Login.remember")}</label>
             </div>
             <button className='login-btn' onClick={submitLogin}>
-                Anmelden
+                {t("Login.login")}
             </button>
             <Link className='forgot-pwd-btn' to='/auth/forgot-pwd'>
-                Passwort vergessen?
+                {t("Login.forgotPassword")}
             </Link>
         </div>
     )

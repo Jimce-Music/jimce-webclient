@@ -27,11 +27,7 @@ export default function Sidebar({ onOpen }: Props) {
         { name: t('Sidebar.Dashboard'), path: '/', icon: HomeIcon },
         { name: t('Sidebar.Music'), path: '/music', icon: MusicIcon },
         { name: t('Sidebar.Podcasts'), path: '/podcasts', icon: PodcastIcon },
-        {
-            name: t('Sidebar.Audiobooks'),
-            path: '/audiobooks',
-            icon: AudiobookIcon
-        }
+        {name: t('Sidebar.Audiobooks'), path: '/audiobooks', icon: AudiobookIcon}
     ]
 
     const libraryItems = [
