@@ -6,15 +6,83 @@
         "Audiobooks": "Hörbücher",
 
         "Favorites": "Favoriten",
-        "Recent": "Kürzlich",
+        "Recent": "Zuletzt gehört",
         "Library": "Bibliothek",
 
         "Settings": "Einstellungen"
     },
 
+    "TopBar": {
+        "SearchBar": "Nach Musik, Podcasts und Hörbüchern suchen",
+        "Profile": {
+            "changePassword": "Passwort ändern",
+            "logout": "Abmelden"
+        },
+        "logoutModal": {
+            "title": "Möchtest du dich wirklich abmelden?",
+            "cancel": "Abbrechen",
+            "confirm": "Bestätigen"
+        }
+    },
+
+    "SettingsModal": {
+        "title": "Einstellungen",
+
+        "sidebar": {
+            "account": "Konto",
+            "design": "Design",
+            "language": "Sprache",
+
+            "playback": "Wiedergabe",
+            "autoplay": "Autoplay",
+            "crossfade": "Überblenden",
+
+            "library": "Bibliothek",
+            "downloads": "Downloads",
+            "compactLayout": "Kompaktes Layout",
+
+            "aboutJimce": "Über Jimce",
+            "help": "Hilfe"
+        },
+
+        "content": {
+            "account": "Konto",
+            "design": "Design",
+            "language": "Sprache",
+            "autoplay": "Autoplay",
+            "crossfade": "Überblenden",
+            "downloads": "Downloads",
+            "compactLayout": "Kompaktes Layout"
+        }
+    },
+
+    "Login": {
+        "title": "Jimce Login",
+        "remember": "Zugangsdaten merken",
+        "login": "Anmelden",
+        "forgotPassword": "Passwort vergessen?",
+
+        "placeholder": {
+            "user": "Benutzername / E-Mail",
+            "password": "Passwort"
+        }
+    },
+
+    "Registrer": {
+        "title": "Jimce Registrierung",
+        "registrer": "Registrieren",
+
+        "placeholder": {
+            "username": "Benutzername",
+            "email": "E-Mail",
+            "password": "Passwort",
+            "confirmPassword": "Passwort bestätigen"
+        }
+    },
+
     "NotFound": {
         "Title": "404 - Seite nicht gefunden",
-        "Message": "Die von Ihnen gesuchte Seite existiert nicht.",
+        "Message": "Die von dir gesuchte Seite existiert nicht.",
         "GoHomeButton": "Zur Startseite"
     }
 }

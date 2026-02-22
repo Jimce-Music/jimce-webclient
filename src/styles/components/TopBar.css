@@ -64,7 +64,7 @@
 .account-dropdown {
     position: absolute;
     top: 45px; /* Abstand nach unten zum Profilbild */
-    right: 0;   /* Rechtsbündig mit dem Container */
+    right: 0; /* Rechtsbündig mit dem Container */
     background-color: var(--bg-sidebar);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
@@ -85,7 +85,7 @@
     pointer-events: auto; /* Klicks wieder erlauben */
 }
 
-.account-dropdown a, 
+.account-dropdown a,
 .account-dropdown .logout-btn {
     padding: 10px 20px;
     color: var(--text-primary);
@@ -99,7 +99,113 @@
     transition: background-color var(--transition-base);
 }
 
-.account-dropdown a:hover, 
+.account-dropdown a:hover,
 .account-dropdown .logout-btn:hover {
     background-color: var(--bg-hover);
+}
+
+.logout-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition-base);
+}
+
+.logout-modal {
+    background: var(--bg-main);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    max-width: 400px;
+    max-height: 200px;
+    width: 100%;
+    height: 100%;
+    margin: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+
+    transform: scale(1);
+}
+
+.logout-modal-options {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.logout-modal-title {
+    font-size: 24px;
+    margin: 20px 0;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.logout-modal-title-underline {
+    border-top: 2px solid var(--accent-danger);
+    max-width: 19rem;
+    margin-left: 3rem;
+}
+
+.logout-modal-backdrop.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.logout-modal.active {
+    animation: scaleBounce 300ms ease forwards;
+}
+
+@keyframes scaleBounce {
+    0% {
+        transform: scale(0.5);
+    }
+    70% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.logout-modal-cancel {
+    text-decoration: none;
+    outline: none;
+    border: none;
+    border-radius: var(--radius-lg);
+    color: var(--text-primary);
+    background-color: var(--accent-danger);
+    transition: var(--transition-fast);
+    box-shadow: var(--shadow-md);
+    padding: 10px 15px;
+}
+
+.logout-modal-cancel:hover {
+    background-color: var(--accent-danger-hover);
+    cursor: pointer;
+}
+
+.logout-modal-confirm {
+    text-decoration: none;
+    outline: none;
+    border: none;
+    border-radius: var(--radius-lg);
+    color: var(--text-primary);
+    background-color: var(--bg-surface);
+    transition: var(--transition-fast);
+    box-shadow: var(--shadow-md);
+    padding: 10px 15px;
+}
+
+.logout-modal-confirm:hover {
+    background-color: var(--bg-hover);
+    cursor: pointer;
 }

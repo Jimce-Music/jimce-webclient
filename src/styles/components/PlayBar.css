@@ -12,8 +12,8 @@
     box-sizing: border-box;
 }
 
-.playbar-left, 
-.playbar-middle, 
+.playbar-left,
+.playbar-middle,
 .playbar-right {
     display: flex;
     align-items: center;

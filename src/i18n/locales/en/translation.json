@@ -12,6 +12,74 @@
         "Settings": "Settings"
     },
 
+    "TopBar": {
+        "SearchBar": "Search for Music, Podcasts and Audiobooks",
+        "Profile": {
+            "changePassword": "Change Password",
+            "logout": "Logout"
+        },
+        "logoutModal": {
+            "title": "Would you really like to logout?",
+            "cancel": "Cancel",
+            "confirm": "Confirm"
+        }
+    },
+
+    "SettingsModal": {
+        "title": "Settings",
+
+        "sidebar": {
+            "account": "Account",
+            "design": "Design",
+            "language": "Language",
+
+            "playback": "Playback",
+            "autoplay": "Autoplay",
+            "crossfade": "Crossfade",
+
+            "library": "Library",
+            "downloads": "Downloads",
+            "compactLayout": "Compact Layout",
+
+            "aboutJimce": "About Jimce",
+            "help": "Help"
+        },
+
+        "content": {
+            "account": "Account",
+            "design": "Design",
+            "language": "Language",
+            "autoplay": "Autoplay",
+            "crossfade": "Crossfade",
+            "downloads": "Downloads",
+            "compactLayout": "Compact Layout"
+        }
+    },
+
+    "Login": {
+        "title": "Jimce Login",
+        "remember": "Remember me",
+        "login": "Login",
+        "forgotPassword": "Forgot password?",
+
+        "placeholder": {
+            "user": "Username / Email",
+            "password": "Password"
+        }
+    },
+
+    "Registrer": {
+        "title": "Jimce Registration",
+        "registrer": "Registrer",
+
+        "placeholder": {
+            "username": "Username",
+            "email": "Email",
+            "password": "Password",
+            "confirmPassword": "Confirm password"
+        }
+    },
+
     "NotFound": {
         "Title": "404 - Page Not Found",
         "Message": "The page you are looking for does not exist.",
