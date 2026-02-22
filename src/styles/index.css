@@ -195,6 +195,10 @@ input[type='range'] {
     to { transform: rotate(360deg); }
 }
 
+img[src=""], img:not([src]) {
+  display: none;
+}
+
 /* =====================================================
    SCROLLBAR (GLOBAL)
    ===================================================== */
