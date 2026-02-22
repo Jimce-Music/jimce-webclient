@@ -156,6 +156,13 @@ export default function PlayBar() {
     const hasDuration = duration !== null && isFinite(duration) && duration > 0
     const skipMax = hasDuration ? Math.floor(duration as number) : 100
 
+
+    // Berechne den Prozentsatz für die Skipbar
+    const skipPercentage = hasDuration ? (displayedTime / skipMax) * 100 : 0;
+
+    // Berechne den Prozentsatz für die Volume-Bar
+    const volumePercentage = volume;
+
     return (
         <div className='playbar'>
             <div className='playbar-left'>
@@ -238,6 +245,9 @@ export default function PlayBar() {
                                 ? 'Dauer noch nicht verfügbar'
                                 : 'Sprung zur Zeit'
                         }
+                        style={{
+                            background: `linear-gradient(to right, var(--accent-primary) ${skipPercentage}%, rgba(255, 255, 255, 0.3) ${skipPercentage}%)`
+                        }}
                     />
                     <p className='remaining-time'>{remainingTime}</p>
                 </div>
@@ -271,6 +281,9 @@ export default function PlayBar() {
                         const v = Number(e.target.value)
                         setVol(v)
                         setVolume(v)
+                    }}
+                    style={{
+                        background: `linear-gradient(to right, var(--accent-primary) ${volumePercentage}%, rgba(255, 255, 255, 0.3) ${volumePercentage}%)`
                     }}
                 />
             </div>
