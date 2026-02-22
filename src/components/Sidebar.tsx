@@ -45,14 +45,14 @@ export default function Sidebar({ onOpen }: Props) {
     return (
         <div className='sidebar'>
             <div>
-                <a className='header' href='/'>
+                <Link className='header' to='/'>
                     <img
                         style={{ width: '35px', height: '35px' }}
                         src={Logo}
                         alt='Logo'
                     />
                     <h2>Jimce</h2>
-                </a>
+                </Link>
 
                 <div className='menu'>
                     {menuItems.map((item) => {
