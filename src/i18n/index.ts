@@ -3,7 +3,8 @@ import { initReactI18next } from 'react-i18next'
 import en from './locales/en/translation.json'
 import de from './locales/de/translation.json'
 import { detectLanguage } from './detector.ts'
-;(async () => {
+
+(async () => {
     const detectedLang = await detectLanguage(['en', 'de'])
 
     await i18n.use(initReactI18next).init({
