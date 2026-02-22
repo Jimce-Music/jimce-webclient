@@ -14,6 +14,7 @@ export default function Login() {
     const { t } = useTranslation()
     const [user, setUser] = useState('')
     const [password, setPassword] = useState('')
+    const[error, setError] = useState('')
 
     const [showPassword, setShowPassword] = useState(false)
 
@@ -29,21 +30,29 @@ export default function Login() {
         console.log(req.data)
         const token = req.data?.token
         if (req.response.status !== 200) {
-            console.error('Login Failed!')
-            return
+            if(req.response.status === 400) {
+                setError(t("Login.errors.passwordOrUsernameToShort"))
+            } else if (req.response.status === 401) {
+                setError(t("Login.errors.incorrectPasswordOrUsername"))
+            } else if (req.response.status === 500) {
+                setError(t("Login.errors.Internal Server Error"))
+            } else {
+                setError(t("Login.errors.unexpectedError"))
+            }
+        } else {
+            if (token) {
+                localStorage.setItem('token', token)
+            }
+            if (token) {
+                api.setConfig({
+                    headers: {
+                        Authorization: 'Bearer ' + token
+                    }
+                })
+            }
+            console.log('Gespeicherter Token:', localStorage.getItem('token'))
+            location.reload()
         }
-        if (token) {
-            localStorage.setItem('token', token)
-        }
-        if (token) {
-            api.setConfig({
-                headers: {
-                    Authorization: 'Bearer ' + token
-                }
-            })
-        }
-        console.log('Gespeicherter Token:', localStorage.getItem('token'))
-        location.reload()
     }
 
     useEffect(() => {
@@ -93,6 +102,8 @@ export default function Login() {
             <Link className='forgot-pwd-btn' to='/auth/forgot-pwd'>
                 {t("Login.forgotPassword")}
             </Link>
+
+            {error && <p className='login-error-message'>{error}</p>}
         </div>
     )
 }

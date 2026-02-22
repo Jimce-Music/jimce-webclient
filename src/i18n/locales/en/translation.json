@@ -65,6 +65,14 @@
         "placeholder": {
             "user": "Username / Email",
             "password": "Password"
+        },
+
+        "errors": {
+            "loginFiled": "Login failed",
+            "incorrectPasswordOrUsername": "Incorrect Password or Username",
+            "internalServerError": "Internal Server Error",
+            "passwordOrUsernameToShort": "Password or Username is to short",
+            "unexpectedError": "Unexpected Error"
         }
     },
 
