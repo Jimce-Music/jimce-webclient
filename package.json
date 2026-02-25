@@ -6,7 +6,7 @@
   "description": "Jimce – a modern cross-platform app for listening to music on another level.",
   "main": "main.js",
   "type": "module",
-  "homepage": "https://https://github.com/Jimce-Music",
+  "homepage": "https://github.com/Jimce-Music",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

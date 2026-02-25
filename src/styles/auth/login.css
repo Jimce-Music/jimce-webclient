@@ -113,3 +113,8 @@
 .password-toggle-icon:hover {
     opacity: 1;
 }
+
+.login-error-message{
+    font-weight: bold;
+    color: var(--accent-danger);
+}

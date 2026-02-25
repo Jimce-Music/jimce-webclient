@@ -65,6 +65,12 @@
         "placeholder": {
             "user": "Benutzername / E-Mail",
             "password": "Passwort"
+        },
+
+        "errors": {
+            "loginFiled": "Anmeldung",
+            "incorrectPasswordOrUsername": "Falsches Passwort oder Benutzername",
+            "internalServerError": "Interner Server Fehler"
         }
     },
 
@@ -76,7 +82,9 @@
             "username": "Benutzername",
             "email": "E-Mail",
             "password": "Passwort",
-            "confirmPassword": "Passwort bestätigen"
+            "confirmPassword": "Passwort bestätigen",
+            "passwordOrUsernameToShort": "Passwort oder Benutzername ist zu kurz",
+            "unexpectedError": "Unbekannter Fehler"
         }
     },
 
