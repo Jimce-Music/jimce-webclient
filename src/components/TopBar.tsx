@@ -55,7 +55,7 @@ export default function TopBar() {
                 <input
                     type='text'
                     name='Search'
-                    placeholder='Search for Music, Podcasts and Audiobooks'
+                    placeholder={t("TopBar.SearchBar")}
                 />
             </div>
 
