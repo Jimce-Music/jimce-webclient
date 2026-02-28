@@ -92,5 +92,13 @@
         "Title": "404 - Page Not Found",
         "Message": "The page you are looking for does not exist.",
         "GoHomeButton": "Go Home"
+    },
+
+    "Dashboard": {
+        "continueListening": "Continue Listening",
+        "continueListeningTitle": "Music Title - Artist Name",
+        "continueListeningDescription": "Pick up where you left off and continue listening to your favorite tracks.",
+
+        "dailyMix": "Daily Mix"
     }
 }

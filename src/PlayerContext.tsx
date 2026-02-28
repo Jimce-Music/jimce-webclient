@@ -18,6 +18,8 @@ export function PlayerProvider({ children }: any) {
     const [audioReady, setAudioReady] = useState(false)
     const [isPlaying, setIsPlaying] = useState(false)
     const [currentTrack, setCurrentTrack] = useState<Track | null>(null)
+    const [currentTime, setCurrentTime] = useState(0)
+    const [duration, setDuration] = useState(0)
 
     console.log(audioReady)
 
@@ -68,15 +70,21 @@ export function PlayerProvider({ children }: any) {
                 setShouldPlay(false)
             }
         }
+        const onTimeUpdate = () => setCurrentTime(a.currentTime)
+        const onDurationChange = () => setDuration(a.duration)
 
         a.addEventListener('play', onPlay)
         a.addEventListener('pause', onPause)
         a.addEventListener('loadedmetadata', onLoaded)
+        a.addEventListener('timeupdate', onTimeUpdate)
+        a.addEventListener('durationchange', onDurationChange)
 
         return () => {
             a.removeEventListener('play', onPlay)
             a.removeEventListener('pause', onPause)
             a.removeEventListener('loadedmetadata', onLoaded)
+            a.removeEventListener('timeupdate', onTimeUpdate)
+            a.removeEventListener('durationchange', onDurationChange)
         }
     }, [volume, shouldPlay])
 
@@ -114,7 +122,9 @@ export function PlayerProvider({ children }: any) {
                 setVolume,
                 src,
                 isPlaying,
-                currentTrack
+                currentTrack,
+                currentTime,
+                duration
             }}
         >
             {children}

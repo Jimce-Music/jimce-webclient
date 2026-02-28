@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import * as api from '@jimce-music/jimce-api-ts'
 import { useTranslation } from 'react-i18next'
 
-import '../../styles/auth/register.css'
+import '../../styles/pages/auth/register.css'
 
 import visibility from '../../assets/icons/visibility.svg'
 import visibilityOff from '../../assets/icons/visibility_off.svg'

@@ -28,8 +28,7 @@ function formatTime(seconds: number | null) {
 }
 
 export default function PlayBar() {
-    const { audioRef, src, setVolume, togglePlay, isPlaying, currentTrack } =
-        usePlayer()
+    const { audioRef, src, setVolume, togglePlay, isPlaying, currentTrack } = usePlayer()
 
     const [volume, setVol] = useState<number>(100)
     const [recentVolume, setRecentVolume] = useState<number>(100)

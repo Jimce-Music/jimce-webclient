@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import * as api from '@jimce-music/jimce-api-ts'
 import { useTranslation } from 'react-i18next'
 
-import '../../styles/auth/login.css'
+import '../../styles/pages/auth/login.css'
 import '../../styles/checkbox.css'
 
 import visibility from '../../assets/icons/visibility.svg'

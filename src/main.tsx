@@ -127,10 +127,7 @@ function App() {
                             <Route path='/' element={<Dashboard />} />
                             <Route path='/music' element={<Music />} />
                             <Route path='/podcasts' element={<Podcasts />} />
-                            <Route
-                                path='/audiobooks'
-                                element={<Audiobooks />}
-                            />
+                            <Route path='/audiobooks' element={<Audiobooks />} />
                             <Route path='/favorites' element={<Favorites />} />
                             <Route path='/recent' element={<Recent />} />
                             <Route path='/library' element={<Library />} />
