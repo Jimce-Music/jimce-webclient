@@ -61,8 +61,8 @@ export default function Dashboard() {
                         )}
                     </div>
                 </div>
-                <div className="daily-mix">
-                    <h1>{t('Dashboard.dailyMix')}</h1>
+                <div className="lyrics-container">
+                    <h1>{t('Dashboard.lyricsTitle')}</h1>
                 </div>
             </div>
         </div>

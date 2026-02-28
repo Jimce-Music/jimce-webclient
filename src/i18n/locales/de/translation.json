@@ -93,11 +93,11 @@
         "Message": "Die von dir gesuchte Seite existiert nicht.",
         "GoHomeButton": "Zur Startseite"
     },
-    
+
     "Dashboard": {
         "continueListening": "Weiterhören",
         "continueListeningTitle": "Musiktitel - Künstlername",
         "continueListeningDescription": "Setze dort fort, wo du aufgehört hast, und höre deine Lieblingstracks weiter.",
-        "dailyMix": "Täglicher Mix"
+        "lyricsTitle": "Lyrics"
     }
 }

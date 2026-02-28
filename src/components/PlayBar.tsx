@@ -17,14 +17,16 @@ import pause from '../assets/icons/playbar/pause.svg'
 import musicQueue from '../assets/icons/playbar/queue_music.svg'
 
 function formatTime(seconds: number | null) {
-    if (seconds === null || isNaN(seconds) || !isFinite(seconds)) return '--:--'
-    const sec = Math.floor(seconds)
-    const h = Math.floor(sec / 3600)
-    const m = Math.floor((sec % 3600) / 60)
-    const s = sec % 60
-    if (h > 0)
-        return `${h}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`
-    return `${m}:${String(s).padStart(2, '0')}`
+    if (seconds === null || isNaN(seconds) || !isFinite(seconds)) return '0:00'
+    
+    const mins = Math.floor(seconds / 60)
+    const secs = Math.floor(seconds % 60)
+    const hours = Math.floor(mins / 60)
+    
+    if (hours > 0) {
+        return `${hours}:${(mins % 60).toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`
+    }
+    return `${mins}:${secs.toString().padStart(2, '0')}`
 }
 
 export default function PlayBar() {
@@ -147,10 +149,7 @@ export default function PlayBar() {
 
     const displayedTime = seeking ? seekValue : currentTime
     const pastTime = formatTime(displayedTime)
-    const remainingTime =
-        duration === null
-            ? '--:--'
-            : formatTime(Math.max(0, (duration || 0) - displayedTime))
+    const totalTime = duration === null ? '0:00' : formatTime(duration)
 
     const hasDuration = duration !== null && isFinite(duration) && duration > 0
     const skipMax = hasDuration ? Math.floor(duration as number) : 100
@@ -248,7 +247,7 @@ export default function PlayBar() {
                             background: `linear-gradient(to right, var(--accent-primary) ${skipPercentage}%, rgba(255, 255, 255, 0.3) ${skipPercentage}%)`
                         }}
                     />
-                    <p className='remaining-time'>{remainingTime}</p>
+                    <p className='remaining-time'>{totalTime}</p>
                 </div>
             </div>
 
