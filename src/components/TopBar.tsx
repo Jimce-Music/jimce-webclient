@@ -69,7 +69,7 @@ export default function TopBar() {
                 />
 
                 <div className={`account-dropdown ${isOpen ? 'show' : ''}`}>
-                    <Link to='/change-password' onClick={toggleDropdown}>
+                    <Link to='/auth/change-password' onClick={toggleDropdown}>
                         {t("TopBar.Profile.changePassword")}
                     </Link>
                     <button onClick={toggleModal} className='logout-btn'>

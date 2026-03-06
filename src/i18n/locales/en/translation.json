@@ -100,5 +100,23 @@
         "continueListeningDescription": "Pick up where you left off and continue listening to your favorite tracks.",
 
         "lyricsTitle": "Lyrics"
+    },
+
+    "changePassword": {
+        "title": "Change Password",
+        "changePasswordBtn": "Change Password",
+
+        "placeholder": {
+            "password": "Password",
+            "confirmPassword": "Confirm password"
+        },
+
+        "errors": {
+            "notTheSame": "The passwords do not match",
+            "passwordToShort": "Password is to short",
+            "unauthorized": "Unauthorized",
+            "internalServerError": "Internal Server Error",
+            "unexpectedError": "Unexpected Error"
+        }
     }
 }

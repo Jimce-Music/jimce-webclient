@@ -99,5 +99,23 @@
         "continueListeningTitle": "Musiktitel - Künstlername",
         "continueListeningDescription": "Setze dort fort, wo du aufgehört hast, und höre deine Lieblingstracks weiter.",
         "lyricsTitle": "Lyrics"
+    },
+
+    "changePassword": {
+        "title": "Passwort ändern",
+        "changePasswordBtn": "Passwort ändern",
+
+        "placeholder": {
+            "password": "Passwort",
+            "confirmPassword": "Passwort bestätigen"
+        },
+
+        "errors": {
+            "notTheSame": "Die Passwörter stimmen nicht überein",
+            "passwordToShort": "Das Passwort ist zu kurz",
+            "unauthorized": "Nicht angemeldet",
+            "internalServerError": "Interner Server Fehler",
+            "unexpectedError": "Unbekannter Fehler"
+        }
     }
 }

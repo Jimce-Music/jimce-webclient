@@ -80,7 +80,7 @@ export default function Login() {
             </div>
             <div className='input-container'>
                 <input
-                    className='register-input'
+                    className='login-input'
                     type={showPassword ? 'text' : 'password'}
                     placeholder={t("Login.placeholder.password")}
                     id='password'
