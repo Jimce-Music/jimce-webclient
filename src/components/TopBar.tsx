@@ -1,9 +1,9 @@
 import '../utils/logout'
 import logout from '../utils/logout'
-import { Link } from 'react-router-dom'
-import { useState, useEffect, useRef } from 'react'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
+import CustomDropdown from './CustomDropdown'
 import '../styles/components/TopBar.css'
 
 import UserIcon from '../assets/icons/user.svg'
@@ -11,17 +11,10 @@ import SearchIcon from '../assets/icons/search.svg'
 
 export default function TopBar() {
     const { t } = useTranslation()
-    const [isOpen, setIsOpen] = useState(false)
     const [isActive, setIsActive] = useState(false)
-    const dropdownRef = useRef<HTMLDivElement>(null)
-
-    const toggleDropdown = () => {
-        setIsOpen(!isOpen)
-    }
 
     const toggleModal = () => {
         setIsActive(!isActive)
-        setIsOpen(false)
     }
 
     const handleLogout = () => {
@@ -30,24 +23,6 @@ export default function TopBar() {
         window.location.hash = '/'
     }
 
-    useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
-            if (
-                isOpen &&
-                dropdownRef.current &&
-                !dropdownRef.current.contains(event.target as Node)
-            ) {
-                setIsOpen(false)
-            }
-        }
-
-        document.addEventListener('mousedown', handleClickOutside)
-
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside)
-        }
-    }, [isOpen])
-
     return (
         <div className='topbar'>
             <div className='search-bar'>
@@ -55,25 +30,17 @@ export default function TopBar() {
                 <input
                     type='text'
                     name='Search'
-                    placeholder={t("TopBar.SearchBar")}
+                    placeholder={t('TopBar.SearchBar')}
                 />
             </div>
 
-            {/* Hier die Ref an den Container hängen */}
-            <div className='profile-container' ref={dropdownRef}>
-                <img
-                    className='profile'
-                    src={UserIcon}
-                    alt='Profile'
-                    onClick={toggleDropdown}
-                />
-
-                <div className={`account-dropdown ${isOpen ? 'show' : ''}`}>
-                    <button onClick={toggleModal} className='logout-btn'>
-                        {t("TopBar.Profile.logout")}
-                    </button>
-                </div>
-            </div>
+            <CustomDropdown
+                trigger={<img className='profile' src={UserIcon} alt='Profile' />}
+            >
+                <button onClick={toggleModal} className='logout-btn'>
+                    {t('TopBar.Profile.logout')}
+                </button>
+            </CustomDropdown>
 
             <div
                 className={`logout-modal-backdrop ${isActive ? 'active' : ''}`}
@@ -81,7 +48,7 @@ export default function TopBar() {
             >
                 <div className={`logout-modal ${isActive ? 'active' : ''}`}>
                     <h1 className='logout-modal-title'>
-                        {t("TopBar.logoutModal.title")}
+                        {t('TopBar.logoutModal.title')}
                     </h1>
                     <div className='logout-modal-title-underline'></div>
                     <div className='logout-modal-options'>
@@ -89,13 +56,13 @@ export default function TopBar() {
                             className='logout-modal-confirm'
                             onClick={() => setIsActive(false)}
                         >
-                            {t("TopBar.logoutModal.cancel")}
+                            {t('TopBar.logoutModal.cancel')}
                         </button>
                         <button
                             className='logout-modal-cancel'
                             onClick={handleLogout}
                         >
-                            {t("TopBar.logoutModal.confirm")}
+                            {t('TopBar.logoutModal.confirm')}
                         </button>
                     </div>
                 </div>
