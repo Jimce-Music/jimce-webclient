@@ -26,10 +26,13 @@ import Register from './pages/auth/register.tsx'
 import SettingsModal from './modals/SettingsModal.tsx'
 
 import PlayBar from './components/PlayBar.tsx'
+import { applySavedTheme } from './utils/theme'
 
 //
 import './utils/init_api.ts'
 //
+
+applySavedTheme()
 
 function App() {
     const [settingsOpen, setSettingsOpen] = useState(false)

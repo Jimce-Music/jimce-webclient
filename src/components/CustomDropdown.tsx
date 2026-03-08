@@ -12,7 +12,7 @@ interface CustomDropdownProps {
 export default function CustomDropdown({
     trigger,
     children,
-    align = 'right',
+    align = 'left',
     className = ''
 }: CustomDropdownProps) {
     const [isOpen, setIsOpen] = useState(false)

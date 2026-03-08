@@ -59,44 +59,46 @@ export default function AccountSection() {
     }, [submitChangePassword])
 
     return(
-        <div className="change-password-container">
-            <h1 className='change-password-title'>{t("changePassword.title")}</h1>
+        <div>
+            <div className="change-password-container">
+                <h1 className='change-password-title'>{t("changePassword.title")}</h1>
 
-            <div className='input-container'>
-                <input
-                    className='change-password-input'
-                    type={showPassword ? 'text' : 'password'}
-                    placeholder={t("changePassword.placeholder.password")}
-                    id='password'
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-                <img
-                    src={showPassword ? visibilityOff : visibility}
-                    className='password-toggle-icon'
-                    onClick={() => setShowPassword(!showPassword)}
-                />
+                <div className='input-container'>
+                    <input
+                        className='change-password-input'
+                        type={showPassword ? 'text' : 'password'}
+                        placeholder={t("changePassword.placeholder.password")}
+                        id='password'
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <img
+                        src={showPassword ? visibilityOff : visibility}
+                        className='password-toggle-icon'
+                        onClick={() => setShowPassword(!showPassword)}
+                    />
+                </div>
+
+                <div className='input-container'>
+                    <input
+                        className='change-password-input'
+                        type={showConfirmPassword ? 'text' : 'password'}
+                        placeholder={t("changePassword.placeholder.confirmPassword")}
+                        id='password'
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                    />
+                    <img
+                        src={showConfirmPassword ? visibilityOff : visibility}
+                        className='password-toggle-icon'
+                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    />
+                </div>
+
+                <button className='change-password-btn' onClick={submitChangePassword}>
+                    {t("changePassword.changePasswordBtn")}
+                </button>
+
+                {error && <p className='change-password-error-message'>{error}</p>}
             </div>
-
-            <div className='input-container'>
-                <input
-                    className='change-password-input'
-                    type={showConfirmPassword ? 'text' : 'password'}
-                    placeholder={t("changePassword.placeholder.confirmPassword")}
-                    id='password'
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                />
-                <img
-                    src={showConfirmPassword ? visibilityOff : visibility}
-                    className='password-toggle-icon'
-                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                />
-            </div>
-
-            <button className='change-password-btn' onClick={submitChangePassword}>
-                {t("changePassword.changePasswordBtn")}
-            </button>
-
-            {error && <p className='change-password-error-message'>{error}</p>}
         </div>
     )
 }

@@ -36,6 +36,7 @@ export default function TopBar() {
 
             <CustomDropdown
                 trigger={<img className='profile' src={UserIcon} alt='Profile' />}
+                align='right'
             >
                 <button onClick={toggleModal} className='logout-btn'>
                     {t('TopBar.Profile.logout')}

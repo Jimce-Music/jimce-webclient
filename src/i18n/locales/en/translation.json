@@ -51,6 +51,18 @@
             "crossfade": "Crossfade",
             "downloads": "Downloads",
             "compactLayout": "Compact Layout"
+        },
+
+        "sections": {
+            "design": {
+                "design": "Theme:",
+                "options": {
+                    "neon": "Neon",
+                    "gray": "Gray",
+                    "oled": "OLED",
+                    "black": "Black"
+                }
+            }
         }
     },
 
