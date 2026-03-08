@@ -1,5 +1,12 @@
 import { useTranslation } from 'react-i18next';
 
+import AccountSection from './settings/sections/AccountSection';
+import DesignSection from './settings/sections/DesignSection';
+import LanguageSection from './settings/sections/LanguageSection';
+import AutoplaySection from './settings/sections/AutoplaySection';
+import CrossfadeSection from './settings/sections/CrossfadeSection';
+import DownloadsSection from './settings/sections/DownloadsSection';
+
 import '../styles/modals/SettingsModal.css'
 
 interface Props {
@@ -25,6 +32,7 @@ export default function SettingsModal({ open, onClose }: Props) {
             >
                 <div className='settings-sidebar'>
                     <div className='settings-sidebar-top'>
+                        <a className='settings-sidebar-title' style={{borderTop: 'none', paddingTop: 0}}>{t("SettingsModal.sidebar.general")}</a>
                         <a className='settings-sidebar-option active'>{t("SettingsModal.sidebar.account")}</a>
                         <a className='settings-sidebar-option'>{t("SettingsModal.sidebar.design")}</a>
                         <a className='settings-sidebar-option'>{t("SettingsModal.sidebar.language")}</a>
@@ -35,7 +43,6 @@ export default function SettingsModal({ open, onClose }: Props) {
 
                         <div className='settings-sidebar-title'>{t("SettingsModal.sidebar.library")}</div>
                         <a className='settings-sidebar-option'>{t("SettingsModal.sidebar.downloads")}</a>
-                        <a className='settings-sidebar-option'>{t("SettingsModal.sidebar.compactLayout")}</a>
                     </div>
 
                     <div className='settings-sidebar-bottom'>
@@ -54,29 +61,29 @@ export default function SettingsModal({ open, onClose }: Props) {
                     </div>
                 </div>
                 <div className='settings-content'>
-                    <h1>{t("SettingsModal.title")}</h1>
                     <div className='settings-content-component'>
                         <h2 className='settings-content-title'>{t("SettingsModal.content.account")}</h2>
+                        <AccountSection />
                     </div>
                     <div className='settings-content-component'>
                         <h2 className='settings-content-title'>{t("SettingsModal.content.design")}</h2>
+                        <DesignSection />
                     </div>
                     <div className='settings-content-component'>
                         <h2 className='settings-content-title'>{t("SettingsModal.content.language")}</h2>
+                        <LanguageSection />
                     </div>
                     <div className='settings-content-component'>
                         <h2 className='settings-content-title'>{t("SettingsModal.content.autoplay")}</h2>
+                        <AutoplaySection />
                     </div>
                     <div className='settings-content-component'>
                         <h2 className='settings-content-title'>{t("SettingsModal.content.crossfade")}</h2>
+                        <CrossfadeSection />
                     </div>
                     <div className='settings-content-component'>
                         <h2 className='settings-content-title'>{t("SettingsModal.content.downloads")}</h2>
-                    </div>
-                    <div className='settings-content-component'>
-                        <h2 className='settings-content-title'>
-                            {t("SettingsModal.content.compactLayout")}
-                        </h2>
+                        <DownloadsSection />
                     </div>
                 </div>
             </div>

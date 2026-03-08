@@ -22,7 +22,6 @@ import Library from './pages/Library'
 
 import Login from './pages/auth/login.tsx'
 import Register from './pages/auth/register.tsx'
-import ChangePassword from './pages/auth/changePassword.tsx'
 
 import SettingsModal from './modals/SettingsModal.tsx'
 
@@ -134,7 +133,6 @@ function App() {
                             <Route path='/library' element={<Library />} />
                             <Route path='/auth/login' element={<Login />} />
                             <Route path='/auth/register' element={<Register />} />
-                            <Route path='/auth/change-password' element={<ChangePassword />} />
                         </Routes>
                     </div>
                 </div>

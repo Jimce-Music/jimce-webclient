@@ -26,9 +26,8 @@
     },
 
     "SettingsModal": {
-        "title": "Settings",
-
         "sidebar": {
+            "general": "General",
             "account": "Account",
             "design": "Design",
             "language": "Language",
@@ -39,7 +38,6 @@
 
             "library": "Library",
             "downloads": "Downloads",
-            "compactLayout": "Compact Layout",
 
             "aboutJimce": "About Jimce",
             "help": "Help"

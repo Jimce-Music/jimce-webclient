@@ -1,33 +1,13 @@
-.change-password-page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: calc(100vh - 20vh);
-    background-color: var(--bg-main);
-    font-family: Arial, sans-serif;
-    font-size: 24px;
-}
-
 .change-password-container {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    align-items: center;
-    justify-content: center;
-
-    min-height: 350px;
-    min-width: 350px;
-    padding: 20px;
-    border: 2px solid var(--border-color);
-    border-radius: var(--radius-md);
+    width: 85%;
 }
 
 .change-password-title{
-    font-size: 2rem;
+    font-size: 1.5rem;
     color: var(--text-primary);
-    border-bottom: 2px solid var(--accent-primary);
-    padding-bottom: 12px;
 }
 
 .change-password-input {
@@ -68,12 +48,12 @@
 .change-password-btn:hover {
     cursor: pointer;
     background-color: var(--accent-secondary);
-    transform: scale(1.05);
+    transform: scale(1.005);
 }
 
 .input-container {
     position: relative;
-    width: 90%; /* Wichtig, damit die Breite konsistent bleibt */
+    width: 100%;
     display: flex;
     align-items: center;
 }
