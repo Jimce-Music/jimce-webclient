@@ -62,6 +62,13 @@
                     "oled": "OLED",
                     "black": "Schwarz"
                 }
+            },
+            "language": {
+                "language": "Sprache:",
+                "options": {
+                    "en": "Englisch",
+                    "de": "Deutsch"
+                }
             }
         }
     },
