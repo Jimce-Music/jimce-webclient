@@ -32,9 +32,41 @@ const sectionElementIds: Record<SettingsSection, string> = {
     downloads: 'settings-section-downloads'
 }
 
+const sectionOrder: SettingsSection[] = [
+    'account',
+    'design',
+    'language',
+    'autoplay',
+    'crossfade',
+    'downloads'
+]
+
 export default function SettingsModal({ open, onClose }: Props) {
     const { t } = useTranslation()
     const [activeSection, setActiveSection] = useState<SettingsSection>('account')
+
+    const handleContentScroll = (event: React.UIEvent<HTMLDivElement>) => {
+        const containerTop = event.currentTarget.getBoundingClientRect().top
+        let nextActiveSection: SettingsSection = 'account'
+
+        for (const section of sectionOrder) {
+            const sectionElement = document.getElementById(sectionElementIds[section])
+            if (!sectionElement) {
+                continue
+            }
+
+            const sectionTop = sectionElement.getBoundingClientRect().top - containerTop
+            if (sectionTop <= 24) {
+                nextActiveSection = section
+            }
+        }
+
+        setActiveSection((previousSection) =>
+            previousSection === nextActiveSection
+                ? previousSection
+                : nextActiveSection
+        )
+    }
 
     const scrollToSection = (section: SettingsSection) => {
         const sectionElement = document.getElementById(sectionElementIds[section])
@@ -138,7 +170,7 @@ export default function SettingsModal({ open, onClose }: Props) {
                         </a>
                     </div>
                 </div>
-                <div className='settings-content'>
+                <div className='settings-content' onScroll={handleContentScroll}>
                     <div id={sectionElementIds.account} className='settings-content-component'>
                         <h2 className='settings-content-title'>{t("SettingsModal.content.account")}</h2>
                         <AccountSection />
