@@ -86,6 +86,14 @@
     transition: var(--transition-base);
 }
 
+.settings-sidebar-option-button {
+    border: none;
+    background: transparent;
+    width: 100%;
+    text-align: left;
+    font: inherit;
+}
+
 .settings-sidebar-option:hover {
     background-color: var(--bg-hover);
 }
