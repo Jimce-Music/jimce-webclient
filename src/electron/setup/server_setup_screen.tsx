@@ -1,9 +1,11 @@
 import './server_setup_screen.css'
 import Server from '../../assets/icons/storage.svg'
 import { useEffect, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import * as api from '@jimce-music/jimce-api-ts'
 
 export default function serverSetupScreen() {
+    const { t } = useTranslation()
     const defaultBaseUrl = localStorage.getItem('jimce_api_base_url') || ''
 
     const parsedBaseUrl = useMemo(() => {
@@ -56,12 +58,12 @@ export default function serverSetupScreen() {
         const trimmedPort = port.trim()
 
         if (!isValidHost(trimmedIp)) {
-            setError('Bitte gib eine gueltige IP oder Host-Adresse ein.')
+            setError(t('electron.serverSetup.errors.invalidHost'))
             return
         }
 
         if (!isValidPort(trimmedPort)) {
-            setError('Bitte gib einen gueltigen Port zwischen 1 und 65535 ein.')
+            setError(t('electron.serverSetup.errors.invalidPort'))
             return
         }
 
@@ -74,12 +76,12 @@ export default function serverSetupScreen() {
             const ping = await api.getApiPing()
 
             if (ping.response.status !== 200 || ping.error) {
-                setError('SERVER NOT FOUND')
+                setError(t('electron.serverSetup.errors.serverNotFound'))
                 api.setConfig({ baseUrl: '' })
                 return
             }
         } catch {
-            setError('SERVER NOT FOUND')
+            setError(t('electron.serverSetup.errors.serverNotFound'))
             api.setConfig({ baseUrl: '' })
             return
         } finally {
@@ -95,21 +97,21 @@ export default function serverSetupScreen() {
     return(
         <div className='server-setup-screen'>
             <div className='server-setup-card'>
-                <img className='server-setup-icon' src={Server} alt='Server setup' />
-                <h1 className='server-setup-title'>Server verbinden</h1>
+                <img className='server-setup-icon' src={Server} alt={t('electron.serverSetup.alt.serverIcon')} />
+                <h1 className='server-setup-title'>{t('electron.serverSetup.title')}</h1>
                 <p className='server-setup-subtitle'>
-                    Gib die IP-Adresse und den Port deines Jimce-Servers ein.
+                    {t('electron.serverSetup.subtitle')}
                 </p>
 
                 <form className='server-setup-form' onSubmit={handleSave}>
                     <label className='server-setup-label' htmlFor='server-ip'>
-                        Server-IP / Host
+                        {t('electron.serverSetup.labels.host')}
                     </label>
                     <input
                         id='server-ip'
                         className='server-setup-input'
                         type='text'
-                        placeholder='z.B. 192.168.xxx.xx oder localhost'
+                        placeholder={t('electron.serverSetup.placeholders.host')}
                         value={ip}
                         onChange={(event) => setIp(event.target.value)}
                         autoComplete='off'
@@ -117,7 +119,7 @@ export default function serverSetupScreen() {
                     />
 
                     <label className='server-setup-label' htmlFor='server-port'>
-                        Port
+                        {t('electron.serverSetup.labels.port')}
                     </label>
                     <input
                         id='server-port'
@@ -136,7 +138,7 @@ export default function serverSetupScreen() {
 
                     <button type='submit' className='server-setup-button' disabled={isLoading} aria-busy={isLoading}>
                         {isLoading && <span className='server-setup-spinner' aria-hidden='true' />}
-                        {isLoading ? 'Pruefe Server...' : 'Server speichern'}
+                        {isLoading ? t('electron.serverSetup.actions.checking') : t('electron.serverSetup.actions.save')}
                     </button>
                 </form>
             </div>

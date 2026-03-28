@@ -144,5 +144,31 @@
             "internalServerError": "Internal Server Error",
             "unexpectedError": "Unexpected Error"
         }
+    },
+
+    "electron": {
+        "serverSetup": {
+            "alt": {
+                "serverIcon": "Server setup"
+            },
+            "title": "Connect server",
+            "subtitle": "Enter the IP address and port of your Jimce server.",
+            "labels": {
+                "host": "Server IP / Host",
+                "port": "Port"
+            },
+            "placeholders": {
+                "host": "e.g. 192.168.xxx.xx or localhost"
+            },
+            "actions": {
+                "save": "Save server",
+                "checking": "Checking server..."
+            },
+            "errors": {
+                "invalidHost": "Please enter a valid IP or host address.",
+                "invalidPort": "Please enter a valid port between 1 and 65535.",
+                "serverNotFound": "Server not found"
+            }
+        }
     }
 }
