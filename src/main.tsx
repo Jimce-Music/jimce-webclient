@@ -28,9 +28,11 @@ import SettingsModal from './modals/SettingsModal.tsx'
 import PlayBar from './components/PlayBar.tsx'
 import { applySavedTheme } from './utils/theme'
 
-//
+// ELECTRON //
+import ElectronServerSetupScreen from './electron/setup/server_setup_screen.tsx'
+
+// API //
 import './utils/init_api.ts'
-//
 
 applySavedTheme()
 
@@ -38,17 +40,45 @@ function App() {
     const [settingsOpen, setSettingsOpen] = useState(false)
     const [isChecking, setIsChecking] = useState(true)
     const [isAuthenticated, setIsAuthenticated] = useState(false)
+    const isElectron = navigator.userAgent.toLowerCase().includes('electron')
+
+    function resetElectronAppToSetup() {
+        localStorage.clear()
+        sessionStorage.clear()
+        window.location.hash = '/electron/setup/server'
+    }
 
     useEffect(() => {
         async function initAuth() {
             console.log('DEBUG: Auth-Check gestartet...')
             const token = localStorage.getItem('token')
+            const baseUrl = localStorage.getItem('jimce_api_base_url')
             const currentHash = window.location.hash
             const isAuthPage =
                 currentHash.includes('/auth/login') ||
                 currentHash.includes('/auth/register')
+            const isElectronSetupPage = currentHash.includes('/electron/setup/server')
+            const allowWithoutLogin = isElectron && isElectronSetupPage
+            const isProtectedPage = !isAuthPage && !isElectronSetupPage
+
+            if (isElectron && !isElectronSetupPage && !baseUrl) {
+                resetElectronAppToSetup()
+                setIsChecking(false)
+                return
+            }
+
+            if (isElectron && isProtectedPage && !token) {
+                resetElectronAppToSetup()
+                setIsChecking(false)
+                return
+            }
 
             if (!token) {
+                if (allowWithoutLogin) {
+                    setIsChecking(false)
+                    return
+                }
+
                 if (!isAuthPage) {
                     window.location.hash = '/auth/login'
                 }
@@ -72,8 +102,15 @@ function App() {
                 }
             } catch (err) {
                 console.error('DEBUG: Session ungültig', err)
-                localStorage.removeItem('token')
-                window.location.hash = '/auth/login'
+                if (isElectron && isProtectedPage) {
+                    resetElectronAppToSetup()
+                } else {
+                    localStorage.removeItem('token')
+
+                    if (!allowWithoutLogin) {
+                        window.location.hash = '/auth/login'
+                    }
+                }
             } finally {
                 setIsChecking(false)
             }
@@ -88,6 +125,8 @@ function App() {
     const isAuthPage =
         window.location.hash.includes('/auth/login') ||
         window.location.hash.includes('/auth/register')
+    const isElectronSetupPage = window.location.hash.includes('/electron/setup/server')
+    const showAppChrome = !isAuthPage && !isElectronSetupPage
 
     if(isChecking) {
         return (
@@ -106,7 +145,7 @@ function App() {
 
             <PlayerProvider>
                 {/* Sidebar und Bars nur anzeigen, wenn NICHT auf Login/Register-Seite */}
-                {!isAuthPage && (
+                {showAppChrome && (
                     <>
                         <Sidebar
                             onOpen={() => setSettingsOpen(true)}
@@ -116,9 +155,10 @@ function App() {
                     </>
                 )}
 
-                <div className={!isAuthPage ? 'app-container' : ''}>
-                    <div className={!isAuthPage ? 'pages-container' : ''}>
+                <div className={showAppChrome ? 'app-container' : ''}>
+                    <div className={showAppChrome ? 'pages-container' : ''}>
                         <Routes>
+                            // MAIN //
                             <Route
                                 path='*'
                                 element={
@@ -134,8 +174,20 @@ function App() {
                             <Route path='/favorites' element={<Favorites />} />
                             <Route path='/recent' element={<Recent />} />
                             <Route path='/library' element={<Library />} />
+
+                            // AUTH //
                             <Route path='/auth/login' element={<Login />} />
                             <Route path='/auth/register' element={<Register />} />
+
+                            // ELECTRON //
+                            <Route
+                                path='/electron/setup/server'
+                                element={
+                                    isElectron
+                                        ? <ElectronServerSetupScreen />
+                                        : <NotFound isAuthenticated={isAuthenticated} />
+                                }
+                            />
                         </Routes>
                     </div>
                 </div>

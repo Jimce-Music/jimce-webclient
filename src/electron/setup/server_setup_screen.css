@@ -1,0 +1,121 @@
+body.server-setup-no-scroll {
+	overflow: hidden;
+}
+
+.server-setup-screen {
+	min-height: 100vh;
+	display: grid;
+	place-items: center;
+	padding: 24px;
+	overflow: hidden;
+	background:
+		radial-gradient(circle at 15% 10%, rgba(var(--accent-primary-rgb), 0.22), transparent 40%),
+		radial-gradient(circle at 85% 85%, rgba(var(--accent-primary-rgb), 0.16), transparent 42%),
+		var(--bg-main);
+}
+
+.server-setup-card {
+	width: min(540px, 100%);
+	padding: 26px;
+	border-radius: var(--radius-lg);
+	border: 2px solid var(--border-color);
+	background: color-mix(in srgb, var(--bg-surface) 88%, transparent);
+	box-shadow: var(--shadow-md);
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+    align-items: center;
+}
+
+.server-setup-icon {
+	width: 52px;
+	height: 52px;
+	margin-bottom: 6px;
+}
+
+.server-setup-title {
+	margin: 0;
+	color: var(--text-primary);
+	font-size: clamp(1.45rem, 2.3vw, 1.85rem);
+	letter-spacing: 0.02em;
+}
+
+.server-setup-subtitle {
+	margin: 0 0 8px;
+	color: var(--text-secondary);
+	line-height: 1.5;
+}
+
+.server-setup-form {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+    width: 100%;
+}
+
+.server-setup-label {
+	color: var(--text-primary);
+	font-size: 0.95rem;
+	font-weight: 600;
+}
+
+.server-setup-input {
+	width: 100%;
+	box-sizing: border-box;
+	text-decoration: none;
+	outline: none;
+	border: 2px solid var(--accent-primary);
+	border-radius: var(--radius-md);
+	color: var(--text-primary);
+	background-color: color-mix(in srgb, var(--bg-surface) 85%, transparent);
+	padding: 11px 14px;
+	font-size: 15px;
+	transition: var(--transition-fast);
+}
+
+.server-setup-input::placeholder {
+	color: var(--text-muted);
+}
+
+.server-setup-input:hover,
+.server-setup-input:focus {
+	transform: scale(1.01);
+	border-color: var(--accent-secondary);
+}
+
+.server-setup-button {
+	margin-top: 6px;
+	text-decoration: none;
+	outline: none;
+	border: none;
+	border-radius: var(--radius-sm);
+	font-size: 15px;
+	font-weight: 600;
+	color: var(--text-primary);
+	background-color: var(--accent-primary);
+	padding: 11px 16px;
+	transition: var(--transition-base);
+}
+
+.server-setup-button:hover {
+	cursor: pointer;
+	background-color: var(--accent-secondary);
+	transform: translateY(-1px);
+}
+
+.server-setup-error {
+	margin: 2px 0;
+	color: var(--accent-danger);
+	font-size: 0.92rem;
+	font-weight: 700;
+}
+
+@media (max-width: 640px) {
+	.server-setup-screen {
+		padding: 14px;
+	}
+
+	.server-setup-card {
+		padding: 18px;
+	}
+}

@@ -2,6 +2,8 @@ import { app, BrowserWindow, Menu, shell } from "electron";
 import path from "path";
 
 function createWindow() {
+  const setupHash = '/electron/setup/server';
+
   const win = new BrowserWindow({
     width: 1350,
     height: 825,
@@ -14,9 +16,9 @@ function createWindow() {
   });
 
   if (app.isPackaged) {
-    win.loadFile(path.join(app.getAppPath(), 'dist', 'index.html'));
+    win.loadFile(path.join(app.getAppPath(), 'dist', 'index.html'), { hash: setupHash });
   } else {
-    win.loadURL('http://localhost:5173');
+    win.loadURL(`http://localhost:5173#${setupHash}`);
   }
 }
 
