@@ -69,7 +69,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Build Electron app
-        run: npm run build-app
+        run: npm run build-app -- --publish never
 
       - name: Upload OS installer bundle
         id: upload_os_bundle
