@@ -19,6 +19,7 @@ export default function serverSetupScreen() {
     const [ip, setIp] = useState(parsedBaseUrl?.hostname || '')
     const [port, setPort] = useState(parsedBaseUrl?.port || '8080')
     const [error, setError] = useState('')
+    const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
         document.body.classList.add('server-setup-no-scroll')
@@ -46,8 +47,10 @@ export default function serverSetupScreen() {
         return Number.isInteger(parsed) && parsed >= 1 && parsed <= 65535
     }
 
-    function handleSave(event: React.FormEvent) {
+    async function handleSave(event: React.FormEvent) {
         event.preventDefault()
+
+        if (isLoading) return
 
         const trimmedIp = ip.trim()
         const trimmedPort = port.trim()
@@ -63,9 +66,27 @@ export default function serverSetupScreen() {
         }
 
         const baseUrl = `http://${trimmedIp}:${trimmedPort}`
-        localStorage.setItem('jimce_api_base_url', baseUrl)
 
-        api.setConfig({ baseUrl })
+        // PING SERVER //
+        api.setConfig({ baseUrl: baseUrl })
+        setIsLoading(true)
+        try {
+            const ping = await api.getApiPing()
+
+            if (ping.response.status !== 200 || ping.error) {
+                setError('SERVER NOT FOUND')
+                api.setConfig({ baseUrl: '' })
+                return
+            }
+        } catch {
+            setError('SERVER NOT FOUND')
+            api.setConfig({ baseUrl: '' })
+            return
+        } finally {
+            setIsLoading(false)
+        }
+
+        localStorage.setItem('jimce_api_base_url', baseUrl)
 
         setError('')
         window.location.hash = '/auth/login'
@@ -92,6 +113,7 @@ export default function serverSetupScreen() {
                         value={ip}
                         onChange={(event) => setIp(event.target.value)}
                         autoComplete='off'
+                        disabled={isLoading}
                     />
 
                     <label className='server-setup-label' htmlFor='server-port'>
@@ -107,12 +129,14 @@ export default function serverSetupScreen() {
                         value={port}
                         onChange={(event) => setPort(event.target.value)}
                         autoComplete='off'
+                        disabled={isLoading}
                     />
 
                     {error && <p className='server-setup-error'>{error}</p>}
 
-                    <button type='submit' className='server-setup-button'>
-                        Server speichern
+                    <button type='submit' className='server-setup-button' disabled={isLoading} aria-busy={isLoading}>
+                        {isLoading && <span className='server-setup-spinner' aria-hidden='true' />}
+                        {isLoading ? 'Pruefe Server...' : 'Server speichern'}
                     </button>
                 </form>
             </div>

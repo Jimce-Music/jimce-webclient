@@ -46,6 +46,7 @@ function App() {
         localStorage.clear()
         sessionStorage.clear()
         window.location.hash = '/electron/setup/server'
+        window.location.reload()
     }
 
     useEffect(() => {
