@@ -1,0 +1,88 @@
+name: Build Electron App
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: read
+
+jobs:
+  build-electron:
+    name: Build on ${{ matrix.os_name }}
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            os_name: windows
+            artifact_glob: |
+              dist/*.exe
+              dist/*.msi
+              dist/*.blockmap
+              dist/latest*.yml
+          - os: ubuntu-latest
+            os_name: linux
+            artifact_glob: |
+              dist/*.AppImage
+              dist/*.deb
+              dist/*.rpm
+              dist/*.blockmap
+              dist/latest*.yml
+          - os: macos-latest
+            os_name: macos
+            artifact_glob: |
+              dist/*.dmg
+              dist/*.pkg
+              dist/*.zip
+              dist/*.blockmap
+              dist/latest*.yml
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Setup .npmrc for GitHub Packages
+        shell: bash
+        run: |
+          echo "@jimce-music:registry=https://npm.pkg.github.com" > .npmrc
+          echo "//npm.pkg.github.com/:_authToken=${NPM_TOKEN}" >> .npmrc
+          echo "registry=https://registry.npmjs.org/" >> .npmrc
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Install dependencies
+        run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Build Electron app
+        run: npm run build-app
+
+      - name: Upload OS installer bundle
+        id: upload_os_bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: electron-installers-${{ matrix.os_name }}
+          path: ${{ matrix.artifact_glob }}
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Publish installer link
+        shell: pwsh
+        run: |
+          $runUrl = "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          Add-Content -Path $env:GITHUB_STEP_SUMMARY -Value "## ${{ matrix.os_name }} installers"
+          Add-Content -Path $env:GITHUB_STEP_SUMMARY -Value "- [Open bundled installer artifact]($runUrl/artifacts/${{ steps.upload_os_bundle.outputs.artifact-id }})"
