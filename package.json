@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "author": "Jimce-Music",
   "description": "Jimce – a modern cross-platform app for listening to music on another level.",
-  "main": "./electron/main.js",
+  "main": "./src/electron/main.js",
   "type": "module",
   "homepage": "https://github.com/Jimce-Music",
   "scripts": {
@@ -23,7 +23,7 @@
     "icon": "public/logo-no-bg-outline-fullsize.png",
     "files": [
       "dist",
-      "./electron/main.js"
+      "./src/electron/main.js"
     ],
     "win": {
       "target": [
