@@ -5,7 +5,7 @@ export default function Music() {
     const [url, setUrl] = useState<string>('')
     const [justDownload, setJustDownload] = useState<boolean>(false)
     const [saveWhileStreaming, setSaveWhileStreaming] = useState<boolean>(false)
-    const { play } = usePlayer()
+    const { play, enqueueTrack } = usePlayer()
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
@@ -62,6 +62,39 @@ export default function Music() {
         }
     }
 
+    const handleAddToQueue = async (e: React.FormEvent) => {
+        e.preventDefault()
+        if (!url) return
+
+        try {
+            const requestRes = await fetch(
+                `http://192.168.188.27:4002/request-play?identifier=${encodeURIComponent(url)}`
+            )
+            const data = await requestRes.json()
+
+            if (!data.success) {
+                console.error('Fehler beim Abrufen des Songs')
+                return
+            }
+
+            // Füge den Song zur Queue hinzu
+            enqueueTrack({
+                url: data.streamUrl,
+                streamUrl: data.streamUrl,
+                title: data.title,
+                artist: data.artist,
+                thumbnail: data.thumbnail,
+                link: data.link
+            })
+            
+            // URL-Feld zurücksetzen
+            setUrl('')
+            console.log(`"${data.title}" wurde zur Warteschlange hinzugefügt`)
+        } catch (error) {
+            console.error('Fehler beim Hinzufügen zur Queue:', error)
+        }
+    }
+
     return (
         <div>
             <form onSubmit={handleSubmit}>
@@ -86,6 +119,7 @@ export default function Music() {
                 />
                 <br />
                 <button type='submit'>Abspielen</button>
+                <button type='button' onClick={handleAddToQueue} style={{ marginLeft: '10px' }}>Zur Queue hinzufügen</button>
             </form>
         </div>
     )

@@ -3,7 +3,7 @@ import { usePlayer } from '../PlayerContext'
 
 import '../styles/components/PlayBar.css'
 
-import shuffle from '../assets/icons/playbar/shuffle.svg'
+import shuffleIcon from '../assets/icons/playbar/shuffle.svg'
 import skipPrevious from '../assets/icons/playbar/skip_previous.svg'
 import playArrow from '../assets/icons/playbar/play_arrow.svg'
 import skipNext from '../assets/icons/playbar/skip_next.svg'
@@ -30,10 +30,28 @@ function formatTime(seconds: number | null) {
 }
 
 export default function PlayBar() {
-    const { audioRef, src, setVolume, togglePlay, isPlaying, currentTrack } = usePlayer()
+    const { 
+        audioRef, 
+        src, 
+        setVolume, 
+        togglePlay, 
+        isPlaying, 
+        currentTrack,
+        playNext,
+        playPrevious,
+        repeatMode,
+        toggleRepeatMode,
+        shuffle,
+        toggleShuffle,
+        activeQueue,
+        currentQueueIndex,
+        playQueueTrackAtIndex,
+        removeFromQueue
+    } = usePlayer()
 
     const [volume, setVol] = useState<number>(100)
     const [recentVolume, setRecentVolume] = useState<number>(100)
+    const [showQueueModal, setShowQueueModal] = useState(false)
 
     const [duration, setDuration] = useState<number | null>(null)
     const [currentTime, setCurrentTime] = useState<number>(0)
@@ -191,13 +209,19 @@ export default function PlayBar() {
                 <div className='playbar-middle-control-area'>
                     <img
                         className='playbar-middle-control-area-element'
-                        src={shuffle}
-                        alt=''
+                        src={shuffleIcon}
+                        alt='shuffle'
+                        onClick={toggleShuffle}
+                        style={{ opacity: shuffle ? 1 : 0.5, cursor: 'pointer' }}
+                        title={shuffle ? 'Shuffle aktiviert' : 'Shuffle deaktiviert'}
                     />
                     <img
                         className='playbar-middle-control-area-element'
                         src={skipPrevious}
-                        alt=''
+                        alt='skip previous'
+                        onClick={playPrevious}
+                        style={{ cursor: 'pointer' }}
+                        title='Vorheriger Track'
                     />
                     <button
                         className='playbar-middle-control-area-playbutton'
@@ -208,12 +232,18 @@ export default function PlayBar() {
                     <img
                         className='playbar-middle-control-area-element'
                         src={skipNext}
-                        alt=''
+                        alt='skip next'
+                        onClick={playNext}
+                        style={{ cursor: 'pointer' }}
+                        title='Nächster Track'
                     />
                     <img
                         className='playbar-middle-control-area-element'
                         src={repeat}
-                        alt=''
+                        alt='repeat'
+                        onClick={toggleRepeatMode}
+                        style={{ opacity: repeatMode === 'off' ? 0.5 : 1, cursor: 'pointer' }}
+                        title={`Repeat: ${repeatMode === 'off' ? 'Aus' : 'Ein Track'}`}
                     />
                 </div>
 
@@ -260,7 +290,10 @@ export default function PlayBar() {
                 <img
                     className='playbar-right-element'
                     src={musicQueue}
-                    alt=''
+                    alt='queue'
+                    onClick={() => setShowQueueModal(!showQueueModal)}
+                    style={{ cursor: 'pointer' }}
+                    title={`Queue (${activeQueue.length} Songs)`}
                 />
                 <img className='playbar-right-element' src={devices} alt='' />
                 <img
@@ -285,6 +318,61 @@ export default function PlayBar() {
                     }}
                 />
             </div>
+
+            {/* Queue Modal */}
+            {showQueueModal && (
+                <div className='queue-modal-overlay' onClick={() => setShowQueueModal(false)}>
+                    <div className='queue-modal' onClick={(e) => e.stopPropagation()}>
+                        <div className='queue-modal-header'>
+                            <h3>Warteschlange ({activeQueue.length})</h3>
+                            <button 
+                                className='queue-modal-close' 
+                                onClick={() => setShowQueueModal(false)}
+                            >
+                                ✕
+                            </button>
+                        </div>
+                        <div className='queue-modal-content'>
+                            {activeQueue.length === 0 ? (
+                                <p className='queue-modal-empty'>Warteschlange ist leer</p>
+                            ) : (
+                                <ul className='queue-modal-list'>
+                                    {activeQueue.map((track: any, index: number) => (
+                                        <li 
+                                            key={index}
+                                            className={`queue-modal-item ${index === currentQueueIndex ? 'queue-modal-item--current' : ''}`}
+                                            onClick={() => {
+                                                playQueueTrackAtIndex(index)
+                                                setShowQueueModal(false)
+                                            }}
+                                        >
+                                            <div className='queue-modal-item-content'>
+                                                <div className='queue-modal-item-number'>
+                                                    {index === currentQueueIndex ? '▶' : index + 1}
+                                                </div>
+                                                <div className='queue-modal-item-info'>
+                                                    <div className='queue-modal-item-title'>{track.title}</div>
+                                                    <div className='queue-modal-item-artist'>{track.artist}</div>
+                                                </div>
+                                            </div>
+                                            <button
+                                                className='queue-modal-item-remove'
+                                                onClick={(e) => {
+                                                    e.stopPropagation()
+                                                    removeFromQueue(index)
+                                                }}
+                                                title='Aus der Warteschlange entfernen'
+                                            >
+                                                ✕
+                                            </button>
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }
