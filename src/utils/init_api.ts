@@ -1,15 +1,18 @@
 import * as api from '@jimce-music/jimce-api-ts'
 
 const savedToken = localStorage.getItem('token')
+const savedBaseUrl = localStorage.getItem('jimce_api_base_url') || 'http://192.168.188.27:8080'
 
 // Set config
 api.setConfig({
-    baseUrl: 'http://192.168.188.27:8080',
+    baseUrl: savedBaseUrl,
     // You could also set default headers (maybe after the auth)
     headers: {
         Authorization: 'Bearer ' + savedToken
     }
 })
 
-const pingRequest = api.getApiPing()
-console.log(pingRequest)
+if (savedBaseUrl) {
+    const pingRequest = api.getApiPing()
+    console.log(pingRequest)
+}

@@ -1,6 +1,35 @@
+import {
+    APP_LANGUAGES,
+    DEFAULT_LANGUAGE,
+    LANGUAGE_STORAGE_KEY,
+    normalizeLanguageCode
+} from '../utils/language'
+
 export function detectLanguage(
-    supportedLanguages: string[] = ['en', 'de']
+    supportedLanguages: readonly string[] = APP_LANGUAGES
 ): string {
-    const lang = navigator.language.split('-')[0].toLocaleLowerCase()
-    return supportedLanguages.includes(lang) ? lang : 'en'
+    const savedLanguage =
+        typeof window !== 'undefined'
+            ? normalizeLanguageCode(
+                  window.localStorage.getItem(LANGUAGE_STORAGE_KEY)
+              )
+            : null
+
+    if (savedLanguage !== null && supportedLanguages.includes(savedLanguage)) {
+        return savedLanguage
+    }
+
+    const browserLanguage =
+        typeof navigator !== 'undefined'
+            ? normalizeLanguageCode(navigator.language)
+            : null
+
+    if (
+        browserLanguage !== null &&
+        supportedLanguages.includes(browserLanguage)
+    ) {
+        return browserLanguage
+    }
+
+    return DEFAULT_LANGUAGE
 }

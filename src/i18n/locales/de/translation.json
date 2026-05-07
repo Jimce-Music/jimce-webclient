@@ -26,9 +26,8 @@
     },
 
     "SettingsModal": {
-        "title": "Einstellungen",
-
         "sidebar": {
+            "general": "Allgemein",
             "account": "Konto",
             "design": "Design",
             "language": "Sprache",
@@ -39,7 +38,6 @@
 
             "library": "Bibliothek",
             "downloads": "Downloads",
-            "compactLayout": "Kompaktes Layout",
 
             "aboutJimce": "Über Jimce",
             "help": "Hilfe"
@@ -53,6 +51,34 @@
             "crossfade": "Überblenden",
             "downloads": "Downloads",
             "compactLayout": "Kompaktes Layout"
+        },
+
+        "sections": {
+            "design": {
+                "design": "Thema:",
+                "options": {
+                    "neon": "Neon",
+                    "gray": "Grau",
+                    "oled": "OLED",
+                    "black": "Schwarz"
+                }
+            },
+            "language": {
+                "language": "Sprache:",
+                "options": {
+                    "en": "Englisch",
+                    "de": "Deutsch"
+                }
+            },
+            "autoplay": {
+                
+            },
+            "crossfade": {
+                "crossfadeSongs": "Songs überblenden"
+            },
+            "downloads": {
+                
+            }
         }
     },
 
@@ -92,5 +118,56 @@
         "Title": "404 - Seite nicht gefunden",
         "Message": "Die von dir gesuchte Seite existiert nicht.",
         "GoHomeButton": "Zur Startseite"
+    },
+
+    "Dashboard": {
+        "continueListening": "Weiterhören",
+        "continueListeningTitle": "Musiktitel - Künstlername",
+        "continueListeningDescription": "Setze dort fort, wo du aufgehört hast, und höre deine Lieblingstracks weiter.",
+        "lyricsTitle": "Lyrics"
+    },
+
+    "changePassword": {
+        "title": "Passwort ändern",
+        "changePasswordBtn": "Passwort ändern",
+
+        "placeholder": {
+            "password": "Passwort",
+            "confirmPassword": "Passwort bestätigen"
+        },
+
+        "errors": {
+            "notTheSame": "Die Passwörter stimmen nicht überein",
+            "passwordToShort": "Das Passwort ist zu kurz",
+            "unauthorized": "Nicht angemeldet",
+            "internalServerError": "Interner Server Fehler",
+            "unexpectedError": "Unbekannter Fehler"
+        }
+    },
+
+    "electron": {
+        "serverSetup": {
+            "alt": {
+                "serverIcon": "Server Einrichtung"
+            },
+            "title": "Server verbinden",
+            "subtitle": "Gib die IP-Adresse und den Port deines Jimce-Servers ein.",
+            "labels": {
+                "host": "Server-IP / Host",
+                "port": "Port"
+            },
+            "placeholders": {
+                "host": "z.B. 192.168.xxx.xx oder localhost"
+            },
+            "actions": {
+                "save": "Server speichern",
+                "checking": "Server wird geprüft..."
+            },
+            "errors": {
+                "invalidHost": "Bitte gib eine gültige IP oder Host-Adresse ein.",
+                "invalidPort": "Bitte gib einen gültigen Port zwischen 1 und 65535 ein.",
+                "serverNotFound": "Server nicht gefunden"
+            }
+        }
     }
 }
