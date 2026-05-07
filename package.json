@@ -1,7 +1,7 @@
 {
   "name": "jimce",
   "private": true,
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "Jimce-Music",
   "description": "Jimce – a modern cross-platform app for listening to music on another level.",
   "main": "./src/electron/main.js",
