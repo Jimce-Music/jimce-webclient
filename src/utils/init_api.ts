@@ -1,7 +1,7 @@
 import * as api from '@jimce-music/jimce-api-ts'
 
 const savedToken = localStorage.getItem('token')
-const savedBaseUrl = localStorage.getItem('jimce_api_base_url') || `${window.location.origin}/api`
+const savedBaseUrl = localStorage.getItem('jimce_api_base_url') || `${window.location.origin}`
 
 // Set config
 api.setConfig({
