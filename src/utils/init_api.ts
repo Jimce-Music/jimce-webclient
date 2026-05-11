@@ -13,6 +13,6 @@ api.setConfig({
 })
 
 if (savedBaseUrl) {
-    const pingRequest = api.getApiPing()
+    const pingRequest = await api.getApiPing()
     console.log(pingRequest)
 }

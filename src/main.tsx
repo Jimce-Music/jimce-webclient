@@ -51,7 +51,6 @@ function App() {
 
     useEffect(() => {
         async function initAuth() {
-            console.log('DEBUG: Auth-Check gestartet...')
             const token = localStorage.getItem('token')
             const baseUrl = localStorage.getItem('jimce_api_base_url')
             const currentHash = window.location.hash
@@ -102,7 +101,6 @@ function App() {
                     throw new Error('Invalid Token')
                 }
             } catch (err) {
-                console.error('DEBUG: Session ungültig', err)
                 if (isElectron && isProtectedPage) {
                     resetElectronAppToSetup()
                 } else {
@@ -115,8 +113,6 @@ function App() {
             } finally {
                 setIsChecking(false)
             }
-
-            console.log('Auth-Status:', { isChecking, isAuthenticated })
         }
 
         initAuth()
