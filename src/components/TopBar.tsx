@@ -3,18 +3,24 @@ import logout from '../utils/logout'
 import { useState, useRef, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { useTranslation } from 'react-i18next'
+import type { GetApiDummySchemasSearchSchemaResponses } from '@jimce-music/jimce-api-ts'
+import { searchStreamed } from  '../utils/searchStreamed'
 
 import CustomDropdown from './CustomDropdown'
 import '../styles/components/TopBar.css'
 
 import UserIcon from '../assets/icons/user.svg'
 import SearchIcon from '../assets/icons/search.svg'
+import { PlayerProvider } from '../PlayerContext'
+
+type SongResult = GetApiDummySchemasSearchSchemaResponses[200]
 
 export default function TopBar() {
     const { t } = useTranslation()
     const [isActive, setIsActive] = useState(false)
     const [isSearchActive, setIsSearchActive] = useState(false)
-    const [searchValue, setSearchValue] = useState('')
+    const [query, setQuery] = useState("")
+    const [searchResults, setSearchResults] = useState<Partial<SongResult>[]>([])
     const overlaySearchInputRef = useRef<HTMLInputElement>(null)
 
     useEffect(() => {
@@ -25,6 +31,23 @@ export default function TopBar() {
             }, 0)
         }
     }, [isSearchActive])
+
+    useEffect(() => {
+        // Debounce: Sende Search-Request nach 5 Sekunden Inaktivität
+        if (query.length === 0) {
+            setSearchResults([])
+            console.log("Clear Search Results...")
+            return
+        }
+
+        const timer = setTimeout(() => {
+            console.log("Send Search Request...")
+            searchStreamed(query, searchResults, setSearchResults)
+        }, 1000)
+
+        console.log("Clear Timer...")
+        return () => clearTimeout(timer)
+    }, [query])
 
     const toggleModal = () => {
         setIsActive(!isActive)
@@ -49,9 +72,9 @@ export default function TopBar() {
             <input
                 type='text'
                 name='Search'
-                value={searchValue}
+                value={query}
                 placeholder={t('TopBar.SearchBar')}
-                onChange={(event) => setSearchValue(event.target.value)}
+                onChange={(event) => setQuery(event.target.value)}
                 onFocus={() => setIsSearchActive(true)}
                 onBlur={closeSearch}
             />
@@ -111,12 +134,33 @@ export default function TopBar() {
                                 ref={overlaySearchInputRef}
                                 type='text'
                                 name='Search'
-                                value={searchValue}
+                                value={query}
                                 placeholder={t('TopBar.SearchBar')}
-                                onChange={(event) => setSearchValue(event.target.value)}
+                                onChange={(event) => setQuery(event.target.value)}
                                 onFocus={() => setIsSearchActive(true)}
                                 onBlur={closeSearch}
                             />
+
+                            <div className="results">
+                                {searchResults.map((results, index) => {
+                                    return(
+                                        <a 
+                                            className='search-result'
+                                            key={results.songId || `result-${index}`}
+                                        >
+                                            <img 
+                                                src={results.image} 
+                                                alt={results.name} 
+                                            />
+
+                                            <div className="song-info">
+                                                <p className='song-name'>{results.name}</p>
+                                                <p className='artist-name'>{results.artistName}</p>
+                                            </div>
+                                        </a>
+                                    )
+                                })}
+                            </div>
                         </div>
                     </div>,
                     document.body

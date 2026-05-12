@@ -32,6 +32,7 @@ export async function searchStreamed(query:string, getter: Partial<SongResult>[]
             const line = buffer.slice(0, lineEnd).trim();
             buffer = buffer.slice(lineEnd + 1);
             if (line) srl.handlePacket(JSON.parse(line));
+            console.log(srl.handlePacket(JSON.parse(line)))
             }
         }
 
