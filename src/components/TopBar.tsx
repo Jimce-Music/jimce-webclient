@@ -1,6 +1,7 @@
 import '../utils/logout'
 import logout from '../utils/logout'
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import { useTranslation } from 'react-i18next'
 
 import CustomDropdown from './CustomDropdown'
@@ -12,6 +13,18 @@ import SearchIcon from '../assets/icons/search.svg'
 export default function TopBar() {
     const { t } = useTranslation()
     const [isActive, setIsActive] = useState(false)
+    const [isSearchActive, setIsSearchActive] = useState(false)
+    const [searchValue, setSearchValue] = useState('')
+    const overlaySearchInputRef = useRef<HTMLInputElement>(null)
+
+    useEffect(() => {
+        if (isSearchActive && overlaySearchInputRef.current) {
+            // Nutze setTimeout, um sicherzustellen, dass das DOM aktualisiert wurde
+            setTimeout(() => {
+                overlaySearchInputRef.current?.focus()
+            }, 0)
+        }
+    }, [isSearchActive])
 
     const toggleModal = () => {
         setIsActive(!isActive)
@@ -23,16 +36,32 @@ export default function TopBar() {
         window.location.hash = '/'
     }
 
+    const closeSearch = () => {
+        setIsSearchActive(false)
+    }
+
+    const searchBar = (
+        <div
+            className={`search-bar ${isSearchActive ? 'active' : ''}`}
+            onClick={(event) => event.stopPropagation()}
+        >
+            <img src={SearchIcon} alt='Search' className='search-icon' />
+            <input
+                type='text'
+                name='Search'
+                value={searchValue}
+                placeholder={t('TopBar.SearchBar')}
+                onChange={(event) => setSearchValue(event.target.value)}
+                onFocus={() => setIsSearchActive(true)}
+                onBlur={closeSearch}
+            />
+        </div>
+    )
+
     return (
         <div className='topbar'>
-            <div className='search-bar'>
-                <img src={SearchIcon} alt='Search' className='search-icon' />
-                <input
-                    type='text'
-                    name='Search'
-                    placeholder={t('TopBar.SearchBar')}
-                />
-            </div>
+            {!isSearchActive && searchBar}
+            {isSearchActive && <div className='search-bar-spacer' />}
 
             <CustomDropdown
                 trigger={<img className='profile' src={UserIcon} alt='Profile' />}
@@ -68,6 +97,30 @@ export default function TopBar() {
                     </div>
                 </div>
             </div>
+
+            {isSearchActive &&
+                createPortal(
+                    <div className='search-overlay' onClick={closeSearch}>
+                        <div className='search-overlay-backdrop' />
+                        <div
+                            className={`search-bar ${isSearchActive ? 'active' : ''}`}
+                            onClick={(event) => event.stopPropagation()}
+                        >
+                            <img src={SearchIcon} alt='Search' className='search-icon' />
+                            <input
+                                ref={overlaySearchInputRef}
+                                type='text'
+                                name='Search'
+                                value={searchValue}
+                                placeholder={t('TopBar.SearchBar')}
+                                onChange={(event) => setSearchValue(event.target.value)}
+                                onFocus={() => setIsSearchActive(true)}
+                                onBlur={closeSearch}
+                            />
+                        </div>
+                    </div>,
+                    document.body
+                )}
         </div>
     )
 }

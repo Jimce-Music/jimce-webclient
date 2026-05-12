@@ -1,4 +1,7 @@
 .topbar {
+    position: fixed;
+    top: 0;
+    left: 250px;
     width: calc(100vw - 250px);
     height: 60px;
     background-color: var(--bg-main);
@@ -9,9 +12,6 @@
     box-sizing: border-box;
     border-left: 1px solid var(--border-color);
     border-bottom: 1px solid var(--border-color);
-    position: fixed;
-    top: 0;
-    left: 250px;
     z-index: 10000;
 }
 
@@ -28,6 +28,18 @@
     position: relative;
     width: 100%;
     max-width: 400px;
+    transition: all 0.25s ease;
+}
+
+.topbar > .search-bar.active {
+    width: min(560px, calc(100vw - 320px));
+    max-width: 560px;
+}
+
+.search-overlay .search-bar.active {
+    width: min(560px, calc(100vw - 320px));
+    max-width: 560px;
+    height: 50px;
 }
 
 .search-bar input {
@@ -38,6 +50,10 @@
     color: var(--text-primary);
     border: 1px solid var(--border-color);
     transition: var(--transition-base);
+}
+
+.search-overlay .search-bar input {
+    height: 30px;
 }
 
 .search-bar input:focus {
@@ -53,6 +69,51 @@
     width: 20px;
     height: 20px;
     pointer-events: none;
+}
+
+.search-bar-spacer {
+    width: 100%;
+    max-width: 400px;
+    height: 42px;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.search-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    padding-top: 5%;
+    z-index: 10002;
+    overflow: hidden;
+}
+
+.search-overlay-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.12);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.search-overlay .search-bar {
+    position: relative;
+    z-index: 1;
+    animation: searchBarFloatIn 180ms ease-out forwards;
+    transition: all 0.3s ease;
+}
+
+@keyframes searchBarFloatIn {
+    from {
+        opacity: 0;
+        transform: translateY(-12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .profile-container {
