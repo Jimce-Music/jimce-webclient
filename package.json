@@ -74,7 +74,7 @@
     "@electron/asar": "^4.0.1",
     "@electron/osx-sign": "^2.3.0",
     "@electron/rebuild": "^4.0.2",
-    "@eslint/js": "^9.39.1",
+    "@eslint/js": "^10.0.1",
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
