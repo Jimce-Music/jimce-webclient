@@ -11,7 +11,7 @@ import '../styles/components/TopBar.css'
 
 import UserIcon from '../assets/icons/user.svg'
 import SearchIcon from '../assets/icons/search.svg'
-import { PlayerProvider } from '../PlayerContext'
+// import { PlayerProvider } from '../PlayerContext'
 
 type SongResult = GetApiDummySchemasSearchSchemaResponses[200]
 
