@@ -65,7 +65,7 @@
     "i18next": "^25.7.3",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "react-i18next": "^16.5.0",
+    "react-i18next": "^17.0.8",
     "react-router-dom": "^7.15.0",
     "streamed-result-list": "^0.3.2",
     "tar": "^7.5.6"
